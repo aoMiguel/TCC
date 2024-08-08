@@ -1,0 +1,93 @@
+POST http://localhost:3333/pratos
+Content-type: application/json
+
+{
+    "name": "barca de camarao",
+    "foto": "foto_barca.png",
+    "description": "esta barca contem camarao",
+    "price":199
+    
+}
+
+###
+
+GET http://localhost:3333/pratos
+
+###
+
+PUT http://localhost:3333/pratos/
+Content-type: application/json
+
+{
+    "name": "temaki",
+    "foto": "foto1.png",
+    "description": "temaki",
+    "price":25
+}
+
+###
+
+DELETE http://localhost:3333/pratos/
+
+###
+
+POST http://localhost:3333/usuario
+content-type: application/json
+
+{
+    "idComanda": "1",
+    "idRestaurante": "1",
+    "gmail": "joaomiguel.msbj@gmail.com",
+    "whats": "999601234"
+}
+
+###
+
+GET http://localhost:3333/usuario
+
+###
+
+PUT http://localhost:3333/usuario/
+Content-Type: application/json
+
+{
+    "idComanda": "2",
+    "idRestaurante": "2",
+    "gmail": "leonardokorb@gmail.com",
+    "whats": "99958-1235"
+}
+
+###
+
+DELETE http://localhost:3333/usuario/
+
+###
+
+POST http://localhost:3333/pedido
+content-type: application/json
+
+{
+   "idpedido": "1",
+   "datahora": "12;12",
+   "idmesa": "1"
+}
+
+###
+
+GET http://localhost:3333/pedido
+
+###
+
+PUT http://localhost:3333/pedido/
+Content-Type: application/json
+
+{
+    "idpedido": "11",
+    "datahora": "12:31",
+    "idmesa": "2"
+}
+
+###
+
+DELETE http://localhost:3333/pedido/
+
