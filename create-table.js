@@ -15,7 +15,7 @@
             telefone       VARCHAR(20),
             capacidade     INT
             FOREIGN KEY (idRestaurante) REFERENCES Comanda(idRestaurante)
-        )
+        )'
     `.then(()=>{
         console.log("A tabla retaurante foi criada com sucesso")
     },
