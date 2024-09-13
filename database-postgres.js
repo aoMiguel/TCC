@@ -39,6 +39,15 @@ export class DataBasePostgres {
       }
    }
 
+   // Listar Restaurantes
+   async listRestaurante(search) {
+      if (search) {
+         return await sql`SELECT * FROM Restaurante WHERE idRestaurante ILIKE ${'%' + search + '%'}`;
+      } else {
+         return await sql`SELECT * FROM Restaurante`;
+      }
+   }
+
    // Criar Prato
    async createPrato(prato) {
       const pratoID = randomUUID();
@@ -122,11 +131,12 @@ export class DataBasePostgres {
 
    // Criar Comanda
    async createComanda(comanda) {
+      const comandaid = randomUUID();
       const { usuarioid, pratosid, idRestaurante, IDcomanda_num } = comanda;
 
       await sql`
-         INSERT INTO Comanda (usuarioid, pratosid, idRestaurante, IDcomanda_num) 
-         VALUES (${usuarioid}, ${pratosid}, ${idRestaurante}, ${IDcomanda_num})
+         INSERT INTO Comanda (comandaid, usuarioid, pratosid, idRestaurante, IDcomanda_num) 
+         VALUES (${comandaid}, ${usuarioid}, ${pratosid}, ${idRestaurante}, ${IDcomanda_num})
       `;
    }
 
@@ -144,5 +154,32 @@ export class DataBasePostgres {
    // Deletar Comanda
    async deleteComanda(id) {
       await sql`DELETE FROM Comanda WHERE IDcomanda_num = ${id}`;
+   }
+
+   // Criar Restaurante
+   async createRestaurante(restaurante) {
+      const { idRestaurante, cnpj, nome, endereco, cep, cidade, bairro, num, compl, telefone, capacidade } = restaurante;
+  
+      await sql`
+          INSERT INTO Restaurante (idRestaurante, cnpj, nome, endereco, cep, cidade, bairro, num, compl, telefone, capacidade) 
+          VALUES (${idRestaurante}, ${cnpj}, ${nome}, ${endereco}, ${cep}, ${cidade}, ${bairro}, ${num}, ${compl}, ${telefone}, ${capacidade})
+      `;
+  }
+  
+
+   // Atualizar Restaurante
+   async updateRestaurante(id, restaurante) {
+      const { idRestaurante, cnpj, nome, endereco, cep, cidade, bairro, num, compl, telefone, capacidade } = restaurante;
+
+      await sql`
+         UPDATE Restaurante 
+         SET idRestaurante = ${idRestaurante}, cnpj = ${cnpj}, nome = ${nome}, endereco = ${endereco}, cep = ${cep}, cidade = ${cidade}, bairro = ${bairro}, num = ${num}, compl = ${compl}, telefone = ${telefone}, capacidade = ${capacidade}
+         WHERE idRestaurante = ${id}
+      `;
+   }
+
+   // Deletar Restaurante
+   async deleteRestaurante(id) {
+      await sql`DELETE FROM Restaurante WHERE idRestaurante = ${id}`;
    }
 }

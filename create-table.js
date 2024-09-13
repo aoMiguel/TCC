@@ -1,7 +1,7 @@
 import { sql } from './db.js';
 
 
-        await sql`
+     await sql`
             CREATE TABLE Restaurante (
                 idRestaurante   TEXT PRIMARY KEY,
                 cnpj            VARCHAR(255),
@@ -71,3 +71,4 @@ import { sql } from './db.js';
             )
         `;
         console.log("A tabela Pedido foi criada com sucesso!");
+        
