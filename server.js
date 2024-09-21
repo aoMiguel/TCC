@@ -1,233 +1,184 @@
-    import fastify from 'fastify';
-    import { DataBasePostgres } from './database-postgres.js';
+import fastify from 'fastify';
+import { DataBasePostgres } from './database-postgres.js';
 
-    const server = fastify();
-    const database = new DataBasePostgres();
+const server = fastify();
+const database = new DataBasePostgres();
 
-    // Pratos
-    server.post("/pratos", async (request, reply) => {
+// Rotas para Pratos
+server.post("/pratos", async (request, reply) => {
+    try {
         const { name, foto, description, price } = request.body;
-
-        await database.createPrato({
-            name,
-            foto,
-            description,
-            price
-        });
-
+        await database.createPrato({ name, foto, description, price });
         reply.status(201).send();
-    });
+    } catch (error) {
+        reply.status(500).send({ error: error.message });
+    }
+});
 
-    server.get("/pratos", async (request) => {
-        const search = request.query.search;
+server.get("/pratos", async (request) => {
+    try {
+        const search = request.query.search || '';
         const pratos = await database.listPratos(search);
         return pratos;
-    });
+    } catch (error) {
+        return { error: error.message };
+    }
+});
 
-    server.put("/pratos/:id", async (request, reply) => {
+server.put("/pratos/:id", async (request, reply) => {
+    try {
         const pratosID = request.params.id;
         const { name, foto, description, price } = request.body;
-
-        await database.updatePrato(pratosID, {
-            name,
-            foto,
-            description,
-            price
-        });
-
+        await database.updatePrato(pratosID, { name, foto, description, price });
         reply.status(204).send();
-    });
+    } catch (error) {
+        reply.status(500).send({ error: error.message });
+    }
+});
 
-    server.delete("/pratos/:id", async (request, reply) => {
+server.delete("/pratos/:id", async (request, reply) => {
+    try {
         const pratosID = request.params.id;
         await database.deletePrato(pratosID);
         reply.status(204).send();
-    });
+    } catch (error) {
+        reply.status(500).send({ error: error.message });
+    }
+});
 
-    // Usuários
-    server.post("/Cliente", async (request, reply) => {
-        const { idComanda, idRestaurante, gmail, whats } = request.body;
-
-        await database.createCliente({
-            idComanda,
-            idRestaurante,
-            gmail,
-            whats
-        });
-
+// Rotas para Clientes
+server.post("/cliente", async (request, reply) => {
+    try {
+        const { gmail, whats } = request.body;
+        const idComanda = await database.getComandaId();
+        const idRestaurante = await database.getRestauranteId();
+        await database.createCliente({ gmail, whats, idComanda, idRestaurante });
         reply.status(201).send();
-    });
+    } catch (error) {
+        reply.status(500).send({ error: error.message });
+    }
+});
 
-    server.get("/Cliente", async (request) => {
-        const search = request.query.search;
+server.get("/cliente", async (request) => {
+    try {
+        const search = request.query.search || '';
         const usuarios = await database.listUsuarios(search);
         return usuarios;
-    });
+    } catch (error) {
+        return { error: error.message };
+    }
+});
 
-    server.put("/Cliente/:id", async (request, reply) => {
+server.put("/cliente/:id", async (request, reply) => {
+    try {
         const usuarioID = request.params.id;
-        const { idComanda, idRestaurante, gmail, whats } = request.body;
-
-        await database.updateCliente(usuarioID, {
-            idComanda,
-            idRestaurante,
-            gmail,
-            whats
-        });
-
+        const { gmail, whats } = request.body;
+        await database.updateCliente(usuarioID, { gmail, whats });
         reply.status(204).send();
-    });
+    } catch (error) {
+        reply.status(500).send({ error: error.message });
+    }
+});
 
-    server.delete("/Cliente/:id", async (request, reply) => {
+server.delete("/cliente/:id", async (request, reply) => {
+    try {
         const usuarioID = request.params.id;
         await database.deleteCliente(usuarioID);
         reply.status(204).send();
-    });
+    } catch (error) {
+        reply.status(500).send({ error: error.message });
+    }
+});
 
-    // Pedidos
-    server.post("/pedido", async (request, reply) => {
-        const { quant, status, datapedid, valor_total, desc_pedido, pratosid, id_comanda_num, idRestaurante  } = request.body;
-
-        await database.createPedido({
-            quant,
-            status,
-            datapedid,
-            valor_total,
-            desc_pedido,
-            pratosid,
-            id_comanda_num,
-            idRestaurante
-        });
-
+// Rotas para Pedidos
+server.post("/pedido", async (request, reply) => {
+    try {
+        const { quant, status, datapedid, valor_total, desc_pedido, pratosid, id_comanda_num } = request.body;
+        await database.createPedido({ quant, status, datapedid, valor_total, desc_pedido, pratosid, id_comanda_num });
         reply.status(201).send();
-    });
+    } catch (error) {
+        reply.status(500).send({ error: error.message });
+    }
+});
 
-    server.get("/pedido", async (request) => {
-        const search = request.query.search;
+server.get("/pedido", async (request) => {
+    try {
+        const search = request.query.search || '';
         const pedidos = await database.listPedidos(search);
         return pedidos;
-    });
+    } catch (error) {
+        return { error: error.message };
+    }
+});
 
-    server.put("/pedido/:id", async (request, reply) => {
+server.put("/pedido/:id", async (request, reply) => {
+    try {
         const pedidoID = request.params.id;
-        const { quant, status, datapedid, valor_total, desc_pedido, pratosid, id_comanda_num, idRestaurante } = request.body;
-
-        await database.updatePedido(pedidoID, {
-            quant,
-            status,
-            datapedid,
-            valor_total,
-            desc_pedido,
-            pratosid,
-            id_comanda_num,
-            idRestaurante
-        });
-
+        const { quant, status, datapedid, valor_total, desc_pedido, pratosid } = request.body;
+        await database.updatePedido(pedidoID, { quant, status, datapedid, valor_total, desc_pedido, pratosid });
         reply.status(204).send();
-    });
+    } catch (error) {
+        reply.status(500).send({ error: error.message });
+    }
+});
 
-    server.delete("/pedido/:id", async (request, reply) => {
+server.delete("/pedido/:id", async (request, reply) => {
+    try {
         const pedidoID = request.params.id;
         await database.deletePedido(pedidoID);
         reply.status(204).send();
-    });
+    } catch (error) {
+        reply.status(500).send({ error: error.message });
+    }
+});
 
-    server.post("/Restaurante", async (request, reply) => {
-        const { idRestaurante, cnpj, nome, endereco, cep, cidade, bairro, num, compl, telefone, capacidade } = request.body;
-
-        await database.createRestaurante({
-            idRestaurante,
-            cnpj,
-            nome,
-            endereco,
-            cep,
-            cidade,
-            bairro,
-            num,
-            compl,
-            telefone,
-            capacidade
-        });
-
+// Rotas para Restaurantes
+server.post("/restaurante", async (request, reply) => {
+    try {
+        const { cnpj, nome, endereco, cep, cidade, bairro, num, compl, telefone, capacidade } = request.body;
+        await database.createRestaurante({ cnpj, nome, endereco, cep, cidade, bairro, num, compl, telefone, capacidade });
         reply.status(201).send();
-    });
+    } catch (error) {
+        reply.status(500).send({ error: error.message });
+    }
+});
 
-    server.get("/Restaurante", async (request) => {
-        const search = request.query.search;
+server.get("/restaurante", async (request) => {
+    try {
+        const search = request.query.search || '';
         const restaurante = await database.listRestaurante(search);
         return restaurante;
-    });
+    } catch (error) {
+        return { error: error.message };
+    }
+});
 
-    server.put("/Restaurante/:id", async (request, reply) => {
-        const restID = request.params.id
-        const { idRestaurante, cnpj, nome, endereco, cep, cidade, bairro, num, compl, telefone, capacidade  } = request.body;
-
-        await database.updateRestaurante(restID, {
-            idRestaurante,
-            cnpj,
-            nome,
-            endereco,
-            cep,
-            cidade,
-            bairro,
-            num,
-            compl,
-            telefone,
-            capacidade
-        });
-
+server.put("/restaurante/:id", async (request, reply) => {
+    try {
+        const restID = request.params.id;
+        const { cnpj, nome, endereco, cep, cidade, bairro, num, compl, telefone, capacidade } = request.body;
+        await database.updateRestaurante(restID, { cnpj, nome, endereco, cep, cidade, bairro, num, compl, telefone, capacidade });
         reply.status(204).send();
-    });
+    } catch (error) {
+        reply.status(500).send({ error: error.message });
+    }
+});
 
-    server.delete("/Restaurante/:id", async (request, reply) => {
-        const restID = request.params.id
+server.delete("/restaurante/:id", async (request, reply) => {
+    try {
+        const restID = request.params.id;
         await database.deleteRestaurante(restID);
         reply.status(204).send();
-    });
+    } catch (error) {
+        reply.status(500).send({ error: error.message });
+    }
+});
 
-    server.post("/Comanda", async (request, reply) => {
-        const { usuarioid, pratosid, idRestaurante, IDcomanda_num } = request.body;
-
-        await database.createComanda({
-            usuarioid,
-            pratosid,
-            idRestaurante,
-            IDcomanda_num
-        });
-
-        reply.status(201).send();
-    });
-
-    server.get("/Comanda", async (request) => {
-        const search = request.query.search;
-        const comanda = await database.listComanda(search);
-        return comanda;
-    });
-
-    server.put("/Comanda/:id", async (request, reply) => {
-        const comandaid = request.params.id
-        const { usuarioid, pratosid, idRestaurante, IDcomanda_num } = request.body;
-
-        await database.updateComanda(comandaid, {
-            usuarioid,
-            pratosid,
-            idRestaurante,
-            IDcomanda_num
-        });
-
-        reply.status(204).send();
-    });
-
-    server.delete("/Comanda/:id", async (request, reply) => {
-        const comandaid = request.params.id
-        await database.deleteComanda(comandaid);
-        reply.status(204).send();
-    });
-
-    server.listen(3333, (err, address) => {
-        if (err) {
-            console.error(err);
-            process.exit(1);
-        }
-        console.log(`Server listening at ${address}`);
-    });
+// Iniciar o servidor
+server.listen(3333, (err, address) => {
+    if (err) {
+        console.error(err);
+        process.exit(1);
+    }
+    console.log(`Server listening at ${address}`);
+});

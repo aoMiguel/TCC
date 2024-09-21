@@ -1,3 +1,5 @@
+### Pratos
+
 POST http://localhost:3333/pratos
 Content-Type: application/json
 
@@ -14,67 +16,67 @@ GET http://localhost:3333/pratos
 
 ###
 
-PUT http://localhost:3333/pratos/
+PUT http://localhost:3333/pratos
 Content-Type: application/json
 
 {
     "name": "temaki",
-    "foto": "foto1.png",
+    "foto": "foto_temaki.png",
     "description": "temaki",
     "price": 25
 }
 
 ###
 
-DELETE http://localhost:3333/pratos/
+DELETE http://localhost:3333/pratos
 
 ###
 
-POST http://localhost:3333/Cliente
+
+### Cliente
+
+POST http://localhost:3333/cliente
 Content-Type: application/json
 
 {
-    "idComanda": "1",
-    "idRestaurante": "1",
     "gmail": "joaomiguel.msbj@gmail.com",
     "whats": "999601234"
 }
 
 ###
 
-GET http://localhost:3333/Cliente
+GET http://localhost:3333/cliente
 
 ###
 
-PUT http://localhost:3333/Cliente/1
+PUT http://localhost:3333/cliente
 Content-Type: application/json
 
 {
-    "idComanda": "2",
-    "idRestaurante": "2",
     "gmail": "leonardokorb@gmail.com",
     "whats": "99958-1235"
 }
 
 ###
 
-DELETE http://localhost:3333/Cliente/1
+DELETE http://localhost:3333/Cliente
 
 ###
 
-# POST Pedido
+
+### Pedido
+
 POST http://localhost:3333/pedido
 Content-Type: application/json
 
 {
-    "quant": 1,
+    "quant": "1",
     "status": "n",
     "datapedid": "2024-09-12T12:12:00",
     "valor_total": 50.0,
     "desc_pedido": "Pedido de sushi",
     "pratosid": 1,
-    "id_comanda_num": 1,
-    "idRestaurante": 1
+    "id_comanda_num": 1
 }
 
 ###
@@ -83,7 +85,7 @@ GET http://localhost:3333/pedido
 
 ###
 
-PUT http://localhost:3333/pedido/
+PUT http://localhost:3333/pedido
 Content-Type: application/json
 
 {
@@ -93,21 +95,22 @@ Content-Type: application/json
     "valor_total": 100.0,
     "desc_pedido": "Pedido de sushi para dois",
     "pratosid": 2,
-    "id_comanda_num": 1,
-    "idRestaurante": 1
+    "id_comanda_num": 1
 }
 
 ###
 
-DELETE http://localhost:3333/pedido/
+DELETE http://localhost:3333/pedido
 
 ###
 
-POST http://localhost:3333/Restaurante
+
+### Restaurante
+
+POST http://localhost:3333/restaurante
 Content-Type: application/json
 
 {
-    "idRestaurante": "2",
     "cnpj": "12345678901224",
     "nome": "Restaurante b",
     "endereco": "Rua Exemplo, 323",
@@ -117,20 +120,19 @@ Content-Type: application/json
     "num": "1223",
     "compl": "ao lado da padaria",
     "telefone": "21999999999",
-    "capacidade": 40
+    "capacidade": "40"
 }
 
 ###
 
-GET http://localhost:3333/Restaurante
+GET http://localhost:3333/restaurante
 
 ###
 
-PUT http://localhost:3333/Restaurante/2
+PUT http://localhost:3333/restaurante
 Content-Type: application/json
 
 {
-    "idRestaurante": "1",
     "cnpj": "12345678901234",
     "nome": "Restaurante A",
     "endereco": "Rua Exemplo, 123",
@@ -140,10 +142,10 @@ Content-Type: application/json
     "num": "123",
     "compl": "fim da rua",
     "telefone": "11999999999",
-    "capacidade": 100
+    "capacidade": "100"
 }
 
 ###
 
-DELETE http://localhost:3333/Restaurante/
+DELETE http://localhost:3333/restaurante
 

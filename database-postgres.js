@@ -1,185 +1,249 @@
-import { randomUUID } from 'node:crypto';
-import { sql } from './db.js';
+import { sql } from "./db.js";
 
 export class DataBasePostgres {
+  // Criar Prato
+  async createPrato(prato) {
+    const { name, foto, description, price } = prato;
 
-   // Listar Pratos
-   async listPratos(search) {
-      if (search) {
-         return await sql`SELECT * FROM Pratos WHERE name ILIKE ${'%' + search + '%'}`;
-      } else {
-         return await sql`SELECT * FROM Pratos`;
-      }
-   }
-
-   // Listar Usuários
-   async listUsuarios(search) {
-      if (search) {
-         return await sql`SELECT * FROM Cliente WHERE gmail ILIKE ${'%' + search + '%'}`;
-      } else {
-         return await sql`SELECT * FROM Cliente`;
-      }
-   }
-
-   // Listar Pedidos
-   async listPedidos(search) {
-      if (search) {
-         return await sql`SELECT * FROM Pedido WHERE pedidoID ILIKE ${'%' + search + '%'}`;
-      } else {
-         return await sql`SELECT * FROM Pedido`;
-      }
-   }
-
-   // Listar Comandas
-   async listComanda(search) {
-      if (search) {
-         return await sql`SELECT * FROM Comanda WHERE IDcomanda_num ILIKE ${'%' + search + '%'}`;
-      } else {
-         return await sql`SELECT * FROM Comanda`;
-      }
-   }
-
-   // Listar Restaurantes
-   async listRestaurante(search) {
-      if (search) {
-         return await sql`SELECT * FROM Restaurante WHERE idRestaurante ILIKE ${'%' + search + '%'}`;
-      } else {
-         return await sql`SELECT * FROM Restaurante`;
-      }
-   }
-
-   // Criar Prato
-   async createPrato(prato) {
-      const pratoID = randomUUID();
-      const { name, foto, description, price } = prato;
-
-      await sql`
-         INSERT INTO Pratos (pratosid, name, foto, description, price) 
-         VALUES (${pratoID}, ${name}, ${foto}, ${description}, ${price})
-      `;
-   }
-
-   // Atualizar Prato
-   async updatePrato(id, prato) {
-      const { name, foto, description, price } = prato;
-
-      await sql`
-         UPDATE Pratos 
-         SET name = ${name}, foto = ${foto}, description = ${description}, price = ${price} 
-         WHERE pratosid = ${id}
-      `;
-   }
-
-   // Deletar Prato
-   async deletePrato(id) {
-      await sql`DELETE FROM Pratos WHERE pratosid = ${id}`;
-   }
-
-   // Criar Cliente
-   async createCliente(cliente) {
-      const usuarioID = randomUUID();
-      const { idComanda, idRestaurante, gmail, whats } = cliente;
-
-      await sql`
-         INSERT INTO Cliente (usuarioid, idComanda, idRestaurante, gmail, whats) 
-         VALUES (${usuarioID}, ${idComanda}, ${idRestaurante}, ${gmail}, ${whats})
-      `;
-   }
-
-   // Atualizar Cliente
-   async updateCliente(id, cliente) {
-      const { idComanda, idRestaurante, gmail, whats } = cliente;
-
-      await sql`
-         UPDATE Cliente 
-         SET idComanda = ${idComanda}, idRestaurante = ${idRestaurante}, gmail = ${gmail}, whats = ${whats} 
-         WHERE usuarioid = ${id}
-      `;
-   }
-
-   // Deletar Cliente
-   async deleteCliente(id) {
-      await sql`DELETE FROM Cliente WHERE usuarioid = ${id}`;
-   }
-
-   // Criar Pedido
-   async createPedido(pedido) {
-      const pedidoID = randomUUID();
-      const { quant, status, datapedid, valor_total, desc_pedido, pratosid, id_comanda_num, idRestaurante } = pedido;
-
-      await sql`
-         INSERT INTO Pedido (pedidoID, quant, status, datapedid, valor_total, desc_pedido, pratosid, id_comanda_num, idRestaurante) 
-         VALUES (${pedidoID}, ${quant}, ${status}, ${datapedid}, ${valor_total}, ${desc_pedido}, ${pratosid}, ${id_comanda_num}, ${idRestaurante})
-      `;
-   }
-
-   // Atualizar Pedido
-   async updatePedido(id, pedido) {
-      const { quant, status, datapedid, valor_total, desc_pedido, pratosid, id_comanda_num, idRestaurante } = pedido;
-
-      await sql`
-         UPDATE Pedido 
-         SET quant = ${quant}, status = ${status}, datapedid = ${datapedid}, valor_total = ${valor_total}, desc_pedido = ${desc_pedido}, pratosid = ${pratosid}, id_comanda_num = ${id_comanda_num}, idRestaurante = ${idRestaurante}
-         WHERE pedidoID = ${id}
-      `;
-   }
-
-   // Deletar Pedido
-   async deletePedido(id) {
-      await sql`DELETE FROM Pedido WHERE pedidoID = ${id}`;
-   }
-
-   // Criar Comanda
-   async createComanda(comanda) {
-      const comandaid = randomUUID();
-      const { usuarioid, pratosid, idRestaurante, IDcomanda_num } = comanda;
-
-      await sql`
-         INSERT INTO Comanda (comandaid, usuarioid, pratosid, idRestaurante, IDcomanda_num) 
-         VALUES (${comandaid}, ${usuarioid}, ${pratosid}, ${idRestaurante}, ${IDcomanda_num})
-      `;
-   }
-
-   // Atualizar Comanda
-   async updateComanda(id, comanda) {
-      const { usuarioid, pratosid, idRestaurante, IDcomanda_num } = comanda;
-
-      await sql`
-         UPDATE Comanda 
-         SET usuarioid = ${usuarioid}, pratosid = ${pratosid}, idRestaurante = ${idRestaurante}, IDcomanda_num = ${IDcomanda_num}
-         WHERE IDcomanda_num = ${id}
-      `;
-   }
-
-   // Deletar Comanda
-   async deleteComanda(id) {
-      await sql`DELETE FROM Comanda WHERE IDcomanda_num = ${id}`;
-   }
-
-   // Criar Restaurante
-   async createRestaurante(restaurante) {
-      const { idRestaurante, cnpj, nome, endereco, cep, cidade, bairro, num, compl, telefone, capacidade } = restaurante;
-  
-      await sql`
-          INSERT INTO Restaurante (idRestaurante, cnpj, nome, endereco, cep, cidade, bairro, num, compl, telefone, capacidade) 
-          VALUES (${idRestaurante}, ${cnpj}, ${nome}, ${endereco}, ${cep}, ${cidade}, ${bairro}, ${num}, ${compl}, ${telefone}, ${capacidade})
-      `;
+    await sql`
+      INSERT INTO Pratos (name, foto, description, price) 
+      VALUES (${name}, ${foto}, ${description}, ${price})
+    `;
   }
-  
 
-   // Atualizar Restaurante
-   async updateRestaurante(id, restaurante) {
-      const { idRestaurante, cnpj, nome, endereco, cep, cidade, bairro, num, compl, telefone, capacidade } = restaurante;
+  // Listar Pratos
+  async listPratos(search) {
+    const pratos = await sql`
+      SELECT * FROM Pratos 
+      WHERE name ILIKE '%' || ${search} || '%' 
+      OR description ILIKE '%' || ${search} || '%'
+    `;
+    return pratos;
+  }
 
-      await sql`
-         UPDATE Restaurante 
-         SET idRestaurante = ${idRestaurante}, cnpj = ${cnpj}, nome = ${nome}, endereco = ${endereco}, cep = ${cep}, cidade = ${cidade}, bairro = ${bairro}, num = ${num}, compl = ${compl}, telefone = ${telefone}, capacidade = ${capacidade}
-         WHERE idRestaurante = ${id}
-      `;
-   }
+  // Atualizar Prato
+  async updatePrato(id, prato) {
+    const { name, foto, description, price } = prato;
 
-   // Deletar Restaurante
-   async deleteRestaurante(id) {
-      await sql`DELETE FROM Restaurante WHERE idRestaurante = ${id}`;
-   }
+    await sql`
+      UPDATE Pratos 
+      SET name = ${name}, foto = ${foto}, description = ${description}, price = ${price}
+      WHERE pratosid = ${id}
+    `;
+  }
+
+  // Deletar Prato
+  async deletePrato(id) {
+    await sql`DELETE FROM Pratos WHERE pratosid = ${id}`;
+  }
+
+  // Criar Cliente
+  async createCliente(cliente) {
+    const { gmail, whats } = cliente;
+
+    const idComanda = await this.getComandaId();
+    const idRestaurante = await this.getRestauranteId();
+
+    console.log("idComanda:", idComanda);
+    console.log("idRestaurante:", idRestaurante);
+
+    if (!idComanda || !idRestaurante) {
+      throw new Error("Comanda ou Restaurante não encontrados");
+    }
+
+    await sql`
+      INSERT INTO Cliente (gmail, whats, idComanda, idRestaurante) 
+      VALUES (${gmail}, ${whats}, ${idComanda}, ${idRestaurante})
+    `;
+  }
+
+  // Listar Clientes
+  async listUsuarios(search) {
+    const usuarios = await sql`
+      SELECT * FROM Cliente 
+      WHERE gmail ILIKE '%' || ${search} || '%'
+    `;
+    return usuarios;
+  }
+
+  // Atualizar Cliente
+  async updateCliente(id, cliente) {
+    const { gmail, whats } = cliente;
+
+    await sql`
+      UPDATE Cliente 
+      SET gmail = ${gmail}, whats = ${whats} 
+      WHERE usuarioid = ${id}
+    `;
+  }
+
+  // Deletar Cliente
+  async deleteCliente(id) {
+    await sql`DELETE FROM Cliente WHERE usuarioid = ${id}`;
+  }
+
+  // Criar Pedido
+  async createPedido(pedido) {
+    const {
+      quant,
+      status,
+      datapedid,
+      valor_total,
+      desc_pedido,
+      pratosid,
+      id_comanda_num,
+      idRestaurante,
+    } = pedido;
+
+    await sql`
+      INSERT INTO Pedido (quant, status, datapedid, valor_total, desc_pedido, pratosid, id_comanda_num, idRestaurante) 
+      VALUES (${quant}, ${status}, ${datapedid}, ${valor_total}, ${desc_pedido}, ${pratosid}, ${id_comanda_num}, ${idRestaurante})
+    `;
+  }
+
+  // Listar Pedidos
+  async listPedidos(search) {
+    const pedidos = await sql`
+      SELECT * FROM Pedido 
+      WHERE desc_pedido ILIKE '%' || ${search} || '%'
+    `;
+    return pedidos;
+  }
+
+  // Atualizar Pedido
+  async updatePedido(id, pedido) {
+    const {
+      quant,
+      status,
+      datapedid,
+      valor_total,
+      desc_pedido,
+      pratosid,
+      id_comanda_num,
+      idRestaurante,
+    } = pedido;
+
+    await sql`
+      UPDATE Pedido 
+      SET quant = ${quant}, status = ${status}, datapedid = ${datapedid}, valor_total = ${valor_total}, desc_pedido = ${desc_pedido}, pratosid = ${pratosid}, id_comanda_num = ${id_comanda_num}, idRestaurante = ${idRestaurante}
+      WHERE pedidoID = ${id}
+    `;
+  }
+
+  // Deletar Pedido
+  async deletePedido(id) {
+    await sql`DELETE FROM Pedido WHERE pedidoID = ${id}`;
+  }
+
+  // Criar Restaurante
+  async createRestaurante(restaurante) {
+    const {
+      cnpj,
+      nome,
+      endereco,
+      cep,
+      cidade,
+      bairro,
+      num,
+      compl,
+      telefone,
+      capacidade,
+    } = restaurante;
+
+    await sql`
+      INSERT INTO Restaurante (cnpj, nome, endereco, cep, cidade, bairro, num, compl, telefone, capacidade) 
+      VALUES (${cnpj}, ${nome}, ${endereco}, ${cep}, ${cidade}, ${bairro}, ${num}, ${compl}, ${telefone}, ${capacidade})
+    `;
+  }
+
+  // Listar Restaurantes
+  async listRestaurante(search) {
+    const restaurante = await sql`
+      SELECT * FROM Restaurante 
+      WHERE nome ILIKE '%' || ${search} || '%'
+    `;
+    return restaurante;
+  }
+
+  // Atualizar Restaurante
+  async updateRestaurante(id, restaurante) {
+    const {
+      cnpj,
+      nome,
+      endereco,
+      cep,
+      cidade,
+      bairro,
+      num,
+      compl,
+      telefone,
+      capacidade,
+    } = restaurante;
+
+    await sql`
+      UPDATE Restaurante 
+      SET cnpj = ${cnpj}, nome = ${nome}, endereco = ${endereco}, cep = ${cep}, cidade = ${cidade}, bairro = ${bairro}, num = ${num}, compl = ${compl}, telefone = ${telefone}, capacidade = ${capacidade}
+      WHERE idRestaurante = ${id}
+    `;
+  }
+
+  // Deletar Restaurante
+  async deleteRestaurante(id) {
+    await sql`DELETE FROM Restaurante WHERE idRestaurante = ${id}`;
+  }
+
+  // Criar Comanda
+  // Dentro da classe DataBasePostgres
+async createComanda(usuarioid, pratosid, idRestaurante) {
+  await sql`
+    INSERT INTO Comanda (usuarioid, pratosid, idRestaurante) 
+    VALUES (${usuarioid}, ${pratosid}, ${idRestaurante});
+  `;
+}
+
+
+  // Listar Comandas
+  async listComanda(search) {
+    const comanda = await sql`
+      SELECT * FROM Comanda 
+      WHERE usuarioid::text ILIKE '%' || ${search} || '%'
+    `;
+    return comanda;
+  }
+
+  // Atualizar Comanda
+  async updateComanda(id, comanda) {
+    const { pratosid } = comanda;
+
+    await sql`
+      UPDATE Comanda 
+      SET pratosid = ${pratosid}
+      WHERE IDcomanda_num = ${id}
+    `;
+  }
+
+  // Deletar Comanda
+  async deleteComanda(id) {
+    await sql`DELETE FROM Comanda WHERE IDcomanda_num = ${id}`;
+  }
+
+  // Obter ID de Usuário
+  async getUsuarioId() {
+    const result = await sql`SELECT usuarioid FROM Cliente LIMIT 1`;
+    return result[0]?.usuarioid;
+  }
+
+  // Obter ID de Comanda
+  async getComandaId() {
+    const result =
+      await sql`SELECT IDcomanda_num FROM Comanda ORDER BY IDcomanda_num DESC LIMIT 1`;
+    return result[0]?.IDcomanda_num;
+  }
+
+  // Obter ID de Restaurante
+  async getRestauranteId() {
+    const result =
+      await sql`SELECT idRestaurante FROM Restaurante ORDER BY idRestaurante DESC LIMIT 1`;
+    return result[0]?.idRestaurante;
+  }
 }
