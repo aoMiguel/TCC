@@ -69,15 +69,13 @@ DELETE http://localhost:3333/Cliente
 POST http://localhost:3333/pedido
 Content-Type: application/json
 
-{
-    "quant": "1",
-    "status": "n",
-    "datapedid": "2024-09-12T12:12:00",
-    "valor_total": 50.0,
-    "desc_pedido": "Pedido de sushi",
-    "pratosid": 1,
-    "id_comanda_num": 1
-}
+    {
+        "quant": 1,
+        "status": "n",
+        "datapedid": "2024-09-12T12:12:00",
+        "valor_total": 50.0,
+        "desc_pedido": "Pedido de sushi"
+    }
 
 ###
 
@@ -94,8 +92,6 @@ Content-Type: application/json
     "datapedid": "2024-09-12T12:31:00",
     "valor_total": 100.0,
     "desc_pedido": "Pedido de sushi para dois",
-    "pratosid": 2,
-    "id_comanda_num": 1
 }
 
 ###
