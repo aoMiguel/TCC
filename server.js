@@ -1,6 +1,9 @@
 import fastify from 'fastify';
 import { DataBasePostgres } from './database-postgres.js';
+<<<<<<< HEAD
 
+=======
+>>>>>>> f2f4c5f (coisando)
 const server = fastify();
 const database = new DataBasePostgres();
 

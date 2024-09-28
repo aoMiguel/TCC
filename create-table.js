@@ -1,6 +1,10 @@
 import { sql } from './db.js';
 
+<<<<<<< HEAD
 /*// Tabela Restaurante
+=======
+// Tabela Restaurante
+>>>>>>> f2f4c5f (coisando)
 await sql`
     CREATE TABLE Restaurante (
         idRestaurante   UUID PRIMARY KEY DEFAULT gen_random_uuid(),  
@@ -74,10 +78,14 @@ await sql`
         FOREIGN KEY (idRestaurante) REFERENCES Restaurante(idRestaurante) 
     )
 `;
+<<<<<<< HEAD
 console.log("A tabela Pedido foi criada com sucesso!");*/
 
 const resultado = await sql`SELECT * FROM Restaurante;`;
 console.log(resultado);
 
 
+=======
+console.log("A tabela Pedido foi criada com sucesso!");
+>>>>>>> f2f4c5f (coisando)
 
