@@ -81,6 +81,14 @@ export class DataBasePostgres {
   async deleteCliente(id) {
     await sql`DELETE FROM Cliente WHERE usuarioid = ${id}`;
   }
+  // Login Cliente
+async loginCliente(gmail, whats) {
+  const result = await sql`
+    SELECT * FROM Cliente 
+    WHERE gmail = ${gmail} AND whats = ${whats}
+  `;
+  return result[0] || null;
+}
 
   // Criar Pedido
   async createPedido(pedido) {

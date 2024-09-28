@@ -1,9 +1,5 @@
 import fastify from 'fastify';
 import { DataBasePostgres } from './database-postgres.js';
-<<<<<<< HEAD
-
-=======
->>>>>>> f2f4c5f (coisando)
 const server = fastify();
 const database = new DataBasePostgres();
 
@@ -134,6 +130,20 @@ server.delete("/pedido/:id", async (request, reply) => {
         reply.status(500).send({ error: error.message });
     }
 });
+// Rota de Login
+server.post("/login", async (request, reply) => {
+    try {
+      const { gmail, whats } = request.body;
+      const usuario = await database.loginCliente(gmail, whats);
+      if (usuario) {
+        reply.status(200).send({ message: "Login bem-sucedido", usuario });
+      } else {
+        reply.status(401).send({ message: "Credenciais inválidas" });
+      }
+    } catch (error) {
+      reply.status(500).send({ error: error.message });
+    }
+  });
 
 // Rotas para Restaurantes
 server.post("/restaurante", async (request, reply) => {
