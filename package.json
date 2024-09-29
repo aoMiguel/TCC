@@ -15,17 +15,8 @@
   "dependencies": {
     "dotenv": "^16.4.5",
     "fastify": "^4.28.0",
-<<<<<<< HEAD
     "mongodb": "^6.8.0",
     "postgres": "^3.4.4"
   }
 }
   
-=======
-    "fastify-cors": "^6.0.3",
-    "mongodb": "^6.8.0",
-    "postgres": "^3.4.4",
-    "vite": "^5.4.8"
-  }
-}
->>>>>>> f2f4c5f (coisando)
