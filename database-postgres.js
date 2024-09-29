@@ -9,6 +9,7 @@ export class DataBasePostgres {
       INSERT INTO Pratos (name, foto, description, price) 
       VALUES (${name}, ${foto}, ${description}, ${price})
     `;
+    
   }
 
   // Listar Pratos

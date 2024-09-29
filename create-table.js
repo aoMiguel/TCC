@@ -74,6 +74,7 @@ await sql`
         FOREIGN KEY (idRestaurante) REFERENCES Restaurante(idRestaurante) 
     )
 `;
+
 console.log("A tabela Pedido foi criada com sucesso!");
 
 

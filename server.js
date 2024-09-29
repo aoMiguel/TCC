@@ -12,6 +12,7 @@ server.post("/pratos", async (request, reply) => {
     } catch (error) {
         reply.status(500).send({ error: error.message });
     }
+    
 });
 
 server.get("/pratos", async (request) => {
