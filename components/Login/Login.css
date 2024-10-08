@@ -28,6 +28,33 @@ body {
   align-items: center;
 }
 
+.navbar {
+  width: 100%;
+  background-color: #333333;
+  padding: 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  border-radius: 0 0 12px 12px;
+  text-align: center;
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+}
+
+.brand-text {
+  color: #bdc3c7;
+  font-size: 26px;
+  font-weight: bold;
+  width: 100%;
+}
+
 .sign-up-container {
   display: flex;
   flex-direction: column;
@@ -38,7 +65,8 @@ body {
   border-radius: 20px;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
   width: 400px;
-  margin: 2rem auto; 
+  margin: 2rem auto;
+  margin-top: 120px; 
 }
 
 h2 {
@@ -55,16 +83,16 @@ form {
 
 input {
   display: block;
-  width: 70%; 
-  padding: 0.8rem; 
-  margin: 0 auto 1.5rem auto; 
+  width: 70%;
+  padding: 0.8rem;
+  margin: 0 auto 1.5rem auto;
   border: none;
-  border-radius: 10px; 
+  border-radius: 10px;
   background-color: #444444;
-  color: #ecf0f1; 
-  font-size: 1rem; 
+  color: #ecf0f1;
+  font-size: 1rem;
   transition: background 0.3s, transform 0.2s;
-  text-align: center; 
+  text-align: center;
 }
 
 input::placeholder {
@@ -77,26 +105,22 @@ input:focus {
 }
 
 button {
-  width: 50%; 
+  width: 50%;
   background: linear-gradient(135deg, #808080, #4A5D5F);
   color: white;
   border: none;
-  padding: 0.8rem; 
+  padding: 0.8rem;
   border-radius: 10px;
   cursor: pointer;
   transition: background 0.3s, transform 0.2s;
-  font-size: 1rem; 
+  font-size: 1rem;
   font-weight: bold;
-  margin: 0 auto; 
-  display: block; 
+  margin: 0 auto;
+  display: block;
 }
 
 button:hover {
   background: linear-gradient(135deg, #6e6e6e, #434f51);
-  transform: scale(1.05);
 }
 
-button:focus {
-  outline: none;
-  color: none;
-}
+
