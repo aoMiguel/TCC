@@ -1,1 +1,132 @@
-<h1></h1>
+:root {
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    font-weight: 400;
+    color-scheme: light dark;
+    color: rgba(255, 255, 255, 0.87);
+    background-color: #242424;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    margin: 0;
+    min-width: 320px;
+    min-height: 100vh;
+    background-color: #1a1a1a;
+}
+
+.app-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+.navbar {
+    width: 100%;
+    background-color: #333333;
+    padding: 10px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.navbar-links {
+    display: flex;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.navbar-links li {
+    margin: 0 20px;
+}
+
+.navbar-links a {
+    color: #bdc3c7;
+    text-decoration: none;
+    font-size: 18px;
+    transition: color 0.3s;
+}
+
+.navbar-links a:hover {
+    color: #ecf0f1;
+}
+
+.sidebar {
+    width: 200px;
+    background-color: #333333;
+    color: #ecf0f1;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 50px; 
+    bottom: 0;
+    left: 0;
+    padding: 2px; 
+}   
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar li {
+    margin: 15px 0;
+}
+
+.sidebar a {
+    color: #bdc3c7;
+    transition: color 0.3s;
+    text-decoration: none;
+    font-size: 20px;
+    padding: 10px 15px;
+    border-radius: 5px;
+}
+
+.sidebar a:hover {
+    color: #ecf0f1;
+}
+
+.main-content {
+    flex: 1;
+    padding: 20px;
+    margin-left: 220px; 
+    padding-top: 20px;
+}
+
+.intro-container {
+    text-align: center;
+    color: #ecf0f1;
+    margin: 3rem 0;
+}
+
+.image-gallery {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 2rem 0;
+}
+
+.image-gallery img {
+    width: 300px;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.reservation-section {
+    text-align: center;
+    margin: 2rem 0;
+}
+
+.reservation-section .btn_submit {
+    margin-top: 1rem;
+}
