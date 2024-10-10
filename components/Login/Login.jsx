@@ -39,7 +39,14 @@ function Login() {
       <div className="app-container">
         <div className="sign-up-container">
           <h2>Cadastre-se!</h2>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} className='form-content'>
+            <input
+              type="text"
+              placeholder="Nome"
+              // value={email}
+              // onChange={(e) => setEmail(e.target.value)}
+              required
+            />
             <input
               type="email"
               placeholder="E-mail"
@@ -54,7 +61,7 @@ function Login() {
               onChange={(e) => setPhone(e.target.value)}
               required
             />
-            <button type="submit">Cadastrar</button>
+            <button className='btn_submit' type="submit">Cadastrar</button>
           </form>
         </div>
       </div>
