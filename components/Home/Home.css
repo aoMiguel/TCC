@@ -110,23 +110,54 @@ body {
 
 .image-gallery {
     display: flex;
-    justify-content: center;
+    flex-wrap: wrap; /* Permite que os cards quebrem linha */
     gap: 1rem;
     margin: 2rem 0;
+    justify-content: center; /* Centraliza os itens */
 }
 
-.image-gallery img {
-    width: 300px;
-    height: auto;
-    border-radius: 10px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-}
-
-.reservation-section {
+.image-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
-    margin: 2rem 0;
+    background-color: #333; /* Fundo dos cards */
+    padding: 10px; /* Espaçamento interno */
+    border-radius: 15px; /* Bordas arredondadas */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    width: 120px; /* Largura do card */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.reservation-section .btn_submit {
-    margin-top: 1rem;
+.image-card img {
+    width: 100%; /* Faz as imagens ocuparem toda a largura disponível */
+    height: auto; /* Mantém a proporção da imagem */
+    border-radius: 10px; /* Arredonda as bordas das imagens */
+}
+
+.image-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+}
+
+.price {
+    margin-top: 5px; /* Espaçamento entre a imagem e o preço */
+    font-size: 0.9rem; /* Ajusta o tamanho da fonte do preço */
+    color: #ecf0f1;
+    font-weight: bold;
+}
+
+button {
+    margin-top: 5px; /* Espaçamento entre o botão e a imagem */
+    padding: 5px 10px; /* Tamanho do botão */
+    border: none; /* Remove bordas */
+    border-radius: 5px; /* Bordas arredondadas */
+    background-color: #4A5D5F; /* Cor de fundo do botão */
+    color: white; /* Cor do texto */
+    cursor: pointer; /* Muda o cursor ao passar sobre o botão */
+    transition: background-color 0.3s; /* Transição de cor */
+}
+
+button:hover {
+    background-color: #808080; /* Cor do botão ao passar o mouse */
 }
