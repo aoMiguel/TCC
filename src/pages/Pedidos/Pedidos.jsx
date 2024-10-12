@@ -1,9 +1,10 @@
 import './Pedidos.css';
+import ItemPedido from '../../components/ItemPedido/ItemPedido';
 
 export default function Pedidos() {
   return (
     <>
-      <h2>Colocar o conteudo aqui dentro</h2>
+      <ItemPedido />
     </>
   );
 }

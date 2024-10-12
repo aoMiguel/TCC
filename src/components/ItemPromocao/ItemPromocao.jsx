@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { GrAdd } from "react-icons/gr";
-import './ItemPratos.css';
+import './ItemPromocao.css';
 
 const ImageCard = ({ src, alt, price }) => {
   const formattedPrice = price.toLocaleString('pt-BR', {
@@ -28,7 +28,7 @@ ImageCard.propTypes = {
   price: PropTypes.number.isRequired,
 };
 
-const ItemPratos = () => {
+const ItemPromocao = () => {
   const images = [
     {
       src: 'https://i.imgur.com/HcJBO3f.jpeg',
@@ -100,12 +100,16 @@ const ItemPratos = () => {
       alt: 'Prato delicioso',
       price: 'R$34,90',
     }
-    
+    ,{
+      src: 'https://i.imgur.com/HcJBO3f.jpeg',
+      alt: 'Prato delicioso',
+      price: 'R$34,90',
+    }
   ];
 
   return (
     <>
-      <h2>Pratos</h2>
+      <h2>Promoção</h2>
       <div className="image-gallery">
         {images.map((image, index) => (
           <ImageCard
@@ -120,4 +124,4 @@ const ItemPratos = () => {
   );
 };
 
-export default ItemPratos;
+export default ItemPromocao;

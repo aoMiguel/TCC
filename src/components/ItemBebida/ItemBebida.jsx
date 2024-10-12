@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { GrAdd } from "react-icons/gr";
-import './ItemPratos.css';
+import './ItemBebida.css';
 
 const ImageCard = ({ src, alt, price }) => {
   const formattedPrice = price.toLocaleString('pt-BR', {
@@ -28,84 +28,78 @@ ImageCard.propTypes = {
   price: PropTypes.number.isRequired,
 };
 
-const ItemPratos = () => {
+const ItemBebida = () => {
   const images = [
     {
-      src: 'https://i.imgur.com/HcJBO3f.jpeg',
+      src: 'https://i.imgur.com/dMwHmTW.jpeg',
+      alt: 'Prato delicioso',
+      price: 'R$34,90',
+    }, {
+      src: 'https://i.imgur.com/dMwHmTW.jpeg',
+      alt: 'Prato delicioso',
+      price: 'R$34,90',
+    }, {
+      src: 'https://i.imgur.com/dMwHmTW.jpeg',
+      alt: 'Prato delicioso',
+      price: 'R$34,90',
+    }, {
+      src: 'https://i.imgur.com/dMwHmTW.jpeg',
+      alt: 'Prato delicioso',
+      price: 'R$34,90',
+    }, {
+      src: 'https://i.imgur.com/dMwHmTW.jpeg',
+      alt: 'Prato delicioso',
+      price: 'R$34,90',
+    }, {
+      src: 'https://i.imgur.com/dMwHmTW.jpeg',
+      alt: 'Prato delicioso',
+      price: 'R$34,90',
+    }, {
+      src: 'https://i.imgur.com/dMwHmTW.jpeg',
+      alt: 'Prato delicioso',
+      price: 'R$34,90',
+    }, {
+      src: 'https://i.imgur.com/dMwHmTW.jpeg',
       alt: 'Prato delicioso',
       price: 'R$34,90',
     },{
-      src: 'https://i.imgur.com/HcJBO3f.jpeg',
+      src: 'https://i.imgur.com/dMwHmTW.jpeg',
+      alt: 'Prato delicioso',
+      price: 'R$34,90',
+    }, {
+      src: 'https://i.imgur.com/dMwHmTW.jpeg',
+      alt: 'Prato delicioso',
+      price: 'R$34,90',
+    }, {
+      src: 'https://i.imgur.com/dMwHmTW.jpeg',
+      alt: 'Prato delicioso',
+      price: 'R$34,90',
+    }, {
+      src: 'https://i.imgur.com/dMwHmTW.jpeg',
       alt: 'Prato delicioso',
       price: 'R$34,90',
     },{
-      src: 'https://i.imgur.com/HcJBO3f.jpeg',
+      src: 'https://i.imgur.com/dMwHmTW.jpeg',
       alt: 'Prato delicioso',
       price: 'R$34,90',
-    },{
-      src: 'https://i.imgur.com/HcJBO3f.jpeg',
+    }, {
+      src: 'https://i.imgur.com/dMwHmTW.jpeg',
       alt: 'Prato delicioso',
       price: 'R$34,90',
-    },{
-      src: 'https://i.imgur.com/HcJBO3f.jpeg',
+    }, {
+      src: 'https://i.imgur.com/dMwHmTW.jpeg',
       alt: 'Prato delicioso',
       price: 'R$34,90',
-    },{
-      src: 'https://i.imgur.com/HcJBO3f.jpeg',
-      alt: 'Prato delicioso',
-      price: 'R$34,90',
-    }
-    ,{
-      src: 'https://i.imgur.com/HcJBO3f.jpeg',
+    }, {
+      src: 'https://i.imgur.com/dMwHmTW.jpeg',
       alt: 'Prato delicioso',
       price: 'R$34,90',
     }
-    ,{
-      src: 'https://i.imgur.com/HcJBO3f.jpeg',
-      alt: 'Prato delicioso',
-      price: 'R$34,90',
-    }
-    ,{
-      src: 'https://i.imgur.com/HcJBO3f.jpeg',
-      alt: 'Prato delicioso',
-      price: 'R$34,90',
-    }
-    ,{
-      src: 'https://i.imgur.com/HcJBO3f.jpeg',
-      alt: 'Prato delicioso',
-      price: 'R$34,90',
-    }
-    ,{
-      src: 'https://i.imgur.com/HcJBO3f.jpeg',
-      alt: 'Prato delicioso',
-      price: 'R$34,90',
-    }
-    ,{
-      src: 'https://i.imgur.com/HcJBO3f.jpeg',
-      alt: 'Prato delicioso',
-      price: 'R$34,90',
-    }
-    ,{
-      src: 'https://i.imgur.com/HcJBO3f.jpeg',
-      alt: 'Prato delicioso',
-      price: 'R$34,90',
-    }
-    ,{
-      src: 'https://i.imgur.com/HcJBO3f.jpeg',
-      alt: 'Prato delicioso',
-      price: 'R$34,90',
-    }
-    ,{
-      src: 'https://i.imgur.com/HcJBO3f.jpeg',
-      alt: 'Prato delicioso',
-      price: 'R$34,90',
-    }
-    
   ];
 
   return (
     <>
-      <h2>Pratos</h2>
+      <h2>Bebidas</h2>
       <div className="image-gallery">
         {images.map((image, index) => (
           <ImageCard
@@ -120,4 +114,4 @@ const ItemPratos = () => {
   );
 };
 
-export default ItemPratos;
+export default ItemBebida;
