@@ -1,0 +1,12 @@
+.app-container {
+  display: flex;
+  height: auto;
+  width: 100vw;
+}
+
+.content {
+  width: 100vw;
+  margin-top: 80px;
+  margin-left: 340px;
+  padding: 20px;
+}

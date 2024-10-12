@@ -1,6 +1,6 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import AppRoutes from '../components/Route/route'
+import AppRoutes from '../src/routes/route'
 import './index.css'
 
 createRoot(document.getElementById('root')).render(
