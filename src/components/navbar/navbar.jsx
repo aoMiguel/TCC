@@ -24,7 +24,6 @@ export default function navbar() {
           <li><Link className='link-categoria link-categoria-hover' to="/pratos">Pratos</Link></li>
           <li><Link className='link-categoria link-categoria-hover' to="/bebidas">Bebidas</Link></li>
           <li><Link className='link-categoria link-categoria-hover' to="/promocao">Promoções</Link></li>
-          <li><Link className='link-categoria link-categoria-hover' to="/pedidos">Pedidos</Link></li>
         </ul>
         <div className="logout-container">
           <Link className='link-categoria link-logout-hover' to="/logout">Logout</Link>

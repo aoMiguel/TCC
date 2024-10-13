@@ -1,0 +1,33 @@
+Frontend/src/components/ItemPedido/pedidos.css
+.pedidos-container {
+  padding: 20px;
+}
+
+.pedidos-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.pedidos-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 0;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.pedidos-button {
+  background-color: #ff4d4d; /* Cor de fundo do botão */
+  color: white; /* Cor do texto do botão */
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.pedidos-button:hover {
+  background-color: #ff1a1a; /* Cor do botão ao passar o mouse */
+}
+

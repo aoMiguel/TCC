@@ -1,29 +1,18 @@
 import './ItemPedido.css';
-import { useState } from 'react'; 
+import { useContext } from 'react';
+import { PedidoContext } from './PedidoContext';
 
 const ItemPedido = () => {
-    const [cartCount, setCartCount] = useState(0)
-
-    const items = [
-        { id: 1, name: 'Produto 1', price: 50.00 },
-        { id: 2, name: 'Produto 2', price: 30.00 },
-        { id: 3, name: 'Produto 3', price: 20.00 },
-    ];
-
-    const total = items.reduce((acc, item) => acc + item.price, 0);
-
-    const addItemToCart = () => { 
-        setCartCount(cartCount + 1);
-    };
+    const { pedidos } = useContext(PedidoContext);
+    const total = pedidos.reduce((acc, item) => acc + item.price, 0);
 
     return (
         <div>
             <h1>Carrinho de Compras</h1>
-            <button onClick={addItemToCart}>Adicionar Item</button> {}
             <div className="cart">
-                {items.map(item => (
-                    <div key={item.id} className="cart-item">
-                        <span>{item.name}</span>
+                {pedidos.map((item, index) => (
+                    <div key={index} className="cart-item">
+                        <span>{item.alt}</span>
                         <span>R$ {item.price.toFixed(2)}</span>
                     </div>
                 ))}
