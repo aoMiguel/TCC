@@ -59,4 +59,5 @@
 
 .add-button:hover {
   background-color: #3b8f4c;
+  transition: .7;
 }

@@ -19,8 +19,8 @@ Frontend/src/components/ItemPedido/pedidos.css
 }
 
 .pedidos-button {
-  background-color: #ff4d4d; /* Cor de fundo do botão */
-  color: white; /* Cor do texto do botão */
+  background-color: #ff4d4d; 
+  color: white; 
   border: none;
   border-radius: 5px;
   padding: 5px 10px;
@@ -28,6 +28,5 @@ Frontend/src/components/ItemPedido/pedidos.css
 }
 
 .pedidos-button:hover {
-  background-color: #ff1a1a; /* Cor do botão ao passar o mouse */
+  background-color: #ff1a1a; 
 }
-

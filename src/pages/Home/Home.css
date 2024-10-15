@@ -1,0 +1,67 @@
+.main-content {
+  flex: 1;
+  padding: 20px;
+}
+
+.carousel-container {
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 20px;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 40px;
+  border: none; /* Remove bordas da caixa do carrossel */
+}
+
+.carousel-slider {
+  height: 400px; 
+  position: relative; 
+  margin-bottom: 20px;
+  overflow: hidden; /* Garante que o conteúdo excedente não apareça */
+}
+
+.carousel-slide {
+  display: flex; 
+  justify-content: center;
+  align-items: center;
+  height: 100%; 
+  border: none; /* Remove borda do slide */
+}
+
+.carousel-image {
+  width: 100%; 
+  height: 100%; 
+  object-fit: cover; /* Garante que a imagem cubra todo o espaço */
+  pointer-events: none; /* Remove a barra de arrastar */
+  border: none; /* Garante que não haja bordas na imagem */
+}
+
+.carousel-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: transparent;
+  color: #ecf0f1;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 24px;
+  z-index: 10;
+}
+
+.prev-button {
+  left: 10px;
+}
+
+.next-button {
+  right: 10px;
+}
+
+.carousel-button:hover {
+  color: #bdc3c7;
+}
+
+.intro-container {
+  text-align: center;
+  color: #ecf0f1;
+  margin: 3rem 0;
+}
