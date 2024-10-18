@@ -2,7 +2,7 @@ import './navbar.css';
 import { CiShoppingCart } from "react-icons/ci";
 import { Link } from 'react-router-dom';
 
-export default function navbar() {
+export default function Navbar({ onLogout }) {
   return (
     <>
       <nav className="navbar">
@@ -17,18 +17,18 @@ export default function navbar() {
       </nav>
       <div className="nav-bar">
         <ul className='categoria'>
-        <div className="logo-container">
-          <Link className='link-categoria logo-text' to="/home">MenuForge</Link>
-        </div>
+          <div className="logo-container">
+            <Link className='link-categoria logo-text' to="/home">MenuForge</Link>
+          </div>
           <li><Link className='link-categoria link-categoria-hover' to="/entradas">Entradas</Link></li>
           <li><Link className='link-categoria link-categoria-hover' to="/pratos">Pratos</Link></li>
           <li><Link className='link-categoria link-categoria-hover' to="/bebidas">Bebidas</Link></li>
           <li><Link className='link-categoria link-categoria-hover' to="/promocao">Promoções</Link></li>
         </ul>
         <div className="logout-container">
-          <Link className='link-categoria link-logout-hover' to="/logout">Logout</Link>
+          <button className='link-categoria link-logout-hover' onClick={onLogout}>Logout</button>
         </div>
       </div>
     </>
   );
-};
+}
