@@ -25,8 +25,10 @@ export default function Navbar({ onLogout }) {
           <li><Link className='link-categoria link-categoria-hover' to="/bebidas">Bebidas</Link></li>
           <li><Link className='link-categoria link-categoria-hover' to="/promocao">Promoções</Link></li>
         </ul>
-        <div className="logout-container">
-          <button className='link-categoria link-logout-hover' onClick={onLogout}>Logout</button>
+        <div className="logout-container"> 
+          <button className='link-categoria link-logout-hover' onClick={onLogout}>
+            <Link to="/login">LogOut</Link>
+          </button>
         </div>
       </div>
     </>
