@@ -39,7 +39,7 @@ const AppRoutes = () => {
 
   return (
     <Router>
-      <div className="app-container">
+      <div className="app-route-container">
         { isAuth ? (
           <>
             <NavBar onLogout={handleLogout} /> 

@@ -1,11 +1,16 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './login.css';
+import Button from '@mui/material/Button';
+import SendRoundedIcon from '@mui/icons-material/SendRounded';
+import TextField from '@mui/material/TextField';
+import Alert from '@mui/material/Alert';
 
 const Login = ({ onLogin }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
+  const [alertVisible, setAlertVisible] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -19,20 +24,18 @@ const Login = ({ onLogin }) => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ nome: name, gmail: email, whats: phone }), 
+        body: JSON.stringify({ nome: name, gmail: email, whats: phone }),
       });
 
       if (response.ok) {
         const result = await response.json();
         console.log('Cliente cadastrado com sucesso:', result);
-        
+
         // Verifique se o token está presente na resposta
         const token = result.token; // Supondo que o token seja retornado na resposta
         if (token) {
           onLogin(token); // Chame a função de login com o token
         } else {
-          // Se não houver token, redirecione para a home
-          console.log('Redirecionando para a home sem token...');
           navigate('/home');
         }
       } else {
@@ -48,33 +51,116 @@ const Login = ({ onLogin }) => {
   return (
     <div className="app-wrapper">
       <div className="app-container">
+      {alertVisible ? (
+          <Alert severity="success">
+            Cliente {name} cadastrado com sucesso.
+          </Alert>
+        ) : 
         <div className="sign-up-container">
-          <h2>Cadastre-se!</h2>
+          <h3>Crie uma conta</h3>
+          <p>Preencha os campos abaixo para criar sua conta.</p>
           <form onSubmit={handleSubmit} className='form-content'>
-            <input
-              type="text"
-              placeholder="Nome"
-              value={name} 
-              onChange={(e) => setName(e.target.value)} 
+            <TextField
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              id="standard-basic"
+              label="Nome"
+              variant="standard"
               required
+              sx={{
+                width: '300px',
+                margin: '10px 0px',
+                '& .MuiInputBase-input': {
+                  color: '#d1d1d1'
+                },
+                '& .MuiFormLabel-root': {
+                  color: '#d1d1d1',
+                  '&.Mui-focused': {
+                    color: '#d1d1d1',
+                  },
+                },
+                '& .MuiInput-underline:before': {
+                  borderBottomColor: '#d1d1d1',
+                },
+                '& .MuiInput-underline:after': {
+                  borderBottomColor: '#d1d1d1',
+                }
+              }}
             />
-            <input
-              type="email"
-              placeholder="E-mail"
+            <TextField
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              id="standard-basic"
+              label="Email"
+              variant="standard"
               required
+              sx={{
+                width: '300px',
+                margin: '10px 0px',
+                '& .MuiInputBase-input': {
+                  color: '#d1d1d1'
+                },
+                '& .MuiFormLabel-root': {
+                  color: '#d1d1d1',
+                  '&.Mui-focused': {
+                    color: '#d1d1d1',
+                  },
+                },
+                '& .MuiInput-underline:before': {
+                  borderBottomColor: '#d1d1d1',
+                },
+                '& .MuiInput-underline:after': {
+                  borderBottomColor: '#d1d1d1',
+                }
+              }}
             />
-            <input
-              type="tel"
-              placeholder="Telefone"
+            <TextField
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
+              id="standard-basic"
+              label="Telefone"
+              variant="standard"
               required
+              sx={{
+                width: '300px',
+                margin: '10px 0px',
+                '& .MuiInputBase-input': {
+                  color: '#d1d1d1'
+                },
+                '& .MuiFormLabel-root': {
+                  color: '#d1d1d1',
+                  '&.Mui-focused': {
+                    color: '#d1d1d1',
+                  },
+                },
+                '& .MuiInput-underline:before': {
+                  borderBottomColor: '#d1d1d1',
+                },
+                '& .MuiInput-underline:after': {
+                  borderBottomColor: '#d1d1d1',
+                }
+              }}
             />
-            <button className='btn_submit' type="submit">Cadastrar</button>
+            <Button
+              type="submit"
+              variant="contained"
+              sx={{ 
+                width: '200px',
+                justifyContent: 'space-between',
+                alignContent: 'center',
+                backgroundColor: '#C7462D', 
+                color: 'white', 
+                textTransform: 'none',
+                margin: '80px 0px 40px 0px',
+              }}
+              startIcon={<></>}
+              endIcon={<SendRoundedIcon />}
+            >
+              Cadastrar
+            </Button>
           </form>
         </div>
+      }
       </div>
     </div>
   );

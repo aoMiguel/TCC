@@ -11,80 +11,55 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-body {
+.app-wrapper {
   margin: 0;
   display: flex;
   place-items: center;
-  min-width: 320px;
+  min-width: 100vw;
   min-height: 100vh;
-  background-color: #1a1a1a;
+  background-image: url('../src/assets/image_login.jpg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
-.sign-up-container {
+
+.app-container{
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  text-align: center;
+  min-width: 100vw;
+  background: rgba(0, 0, 0, 0.6);
+  min-height: 100vh;
+}
+
+.sign-up-container {
   padding: 2rem;
-  background: #2c2c2c;
-  border-radius: 20px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+  background:#1a1a1a;
+  box-shadow: rgba(199, 70, 45, 0.09) 0px 2px 1px, rgba(199, 70, 45, 0.09) 0px 4px 2px, rgba(199, 70, 45, 0.09) 0px 8px 4px, rgba(199, 70, 45, 0.09) 0px 16px 8px, rgba(199, 70, 45, 0.09) 0px 32px 16px;
+  border: .6px solid #ce624c;
+  border-radius: 20px 60px;
   width: 400px;
   margin: 2rem auto;
   margin-top: 120px; 
 }
 
-h2 {
-  color: #ecf0f1;
-  margin-bottom: 1.5rem;
+.sign-up-container h3 {
+  color: #C7462D;
   font-family: 'Arial', sans-serif;
-  font-size: 2rem;
+  font-size: 22px;
   letter-spacing: 1px;
+}
+
+.sign-up-container p {
+  font-size: 12px;
+  color: #BABABA;
+  margin-bottom: 1.5rem;
 }
 
 form {
   width: 100%;
-}
-
-input {
-  display: block;
-  width: 70%;
-  padding: 0.8rem;
-  margin: 10px 0px;
-  border: none;
-  border-radius: 10px;
-  background-color: #444444;
-  color: #ecf0f1;
-  font-size: 1rem;
-  transition: background 0.3s, transform 0.2s;
-  text-align: center;
-}
-
-input::placeholder {
-  color: #bdc3c7;
-}
-
-input:focus {
-  outline: none;
-  background-color: #555555;
-}
-
-.btn_submit {
-  width: 50%;
-  background: linear-gradient(135deg, #808080, #4A5D5F);
-  color: white;
-  border: none;
-  padding: 0.8rem;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: background 0.3s, transform 0.2s;
-  font-size: 1rem;
-  font-weight: bold;
-  display: block;
-  margin: 60px 0px;
-}
-
-.btn_submit:hover {
-  background: linear-gradient(135deg, #6e6e6e, #434f51);
 }
 
 .form-content{
