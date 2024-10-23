@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Home from '../pages/Home/Home';
 import Login from '../pages/Login/Login';
 import Entradas from '../pages/Entradas/Entradas';
@@ -11,46 +11,40 @@ import Promocao from '../pages/Promocao/Promocao';
 import './AppRoutes.css';
 
 const AppRoutes = () => {
-  // Verifica se o token está no localStorage para manter o login
   const [isAuth, setIsAuth] = useState(!!localStorage.getItem('authToken'));
 
-  // Função de login que armazena o token no localStorage
   const handleLogin = (token) => {
     if (token) {
-      console.log('Token recebido:', token); // Log para depuração
-      localStorage.setItem('authToken', token); // Armazena o token
+      console.log('Token recebido:', token);
+      localStorage.setItem('authToken', token); 
       setIsAuth(true); 
     }
   };
 
-  // Função de logout que remove o token
   const handleLogout = () => {
     localStorage.removeItem('authToken');
     setIsAuth(false);
   };
 
-  useEffect(() => {
-    // Checa se o token é válido ou realiza outras verificações de autenticação
-    const token = localStorage.getItem('authToken');
-    if (!token) {
-      setIsAuth(false);
-    }
-  }, []);
+  // Componente de rota protegida
+  const ProtectedRoute = ({ element: Component }) => {
+    return isAuth ? Component : <Navigate to="/login" />;
+  };
 
   return (
     <Router>
       <div className="app-route-container">
-        { isAuth ? (
+        {isAuth ? (
           <>
-            <NavBar onLogout={handleLogout} /> 
+            <NavBar onLogout={handleLogout} />
             <div className="content">
               <Routes>
-                <Route path="/home" element={<Home />} />
-                <Route path="/pratos" element={<Pratos />} />
-                <Route path="/entradas" element={<Entradas />} />
-                <Route path="/pedidos" element={<Pedidos />} />
-                <Route path="/bebidas" element={<Bebida />} />
-                <Route path="/promocao" element={<Promocao />} />
+                <Route path="/home" element={<ProtectedRoute element={<Home />} />} />
+                <Route path="/pratos" element={<ProtectedRoute element={<Pratos />} />} />
+                <Route path="/entradas" element={<ProtectedRoute element={<Entradas />} />} />
+                <Route path="/pedidos" element={<ProtectedRoute element={<Pedidos />} />} />
+                <Route path="/bebidas" element={<ProtectedRoute element={<Bebida />} />} />
+                <Route path="/promocao" element={<ProtectedRoute element={<Promocao />} />} />
                 <Route path="*" element={<Navigate to="/home" />} />
               </Routes>
             </div>

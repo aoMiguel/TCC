@@ -1,23 +1,38 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './login.css';
 import Button from '@mui/material/Button';
 import SendRoundedIcon from '@mui/icons-material/SendRounded';
 import TextField from '@mui/material/TextField';
-import Alert from '@mui/material/Alert';
+import MaskedInput from 'react-text-mask'; 
+import SimpleAlert from '../../components/Alertas/SimpleAlert'
 
 const Login = ({ onLogin }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [alertVisible, setAlertVisible] = useState(false);
+  const [error, setError] = useState(''); 
   const navigate = useNavigate();
+
+  const nameInputRef = useRef(null);
+  const emailInputRef = useRef(null);
+  const phoneInputRef = useRef(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log('Nome:', name, 'Email:', email, 'Phone:', phone);
 
-    // Envio dos dados para o servidor Fastify
+    if (!email.endsWith('@gmail.com')) {
+      setError('O email deve terminar com @gmail.com');
+      return;
+    }
+    if (!phone) {
+      setError('O campo de telefone é obrigatório');
+      return;
+    }
+    setError(''); 
+
     try {
       const response = await fetch('http://localhost:3333/cliente', {
         method: 'POST',
@@ -30,37 +45,41 @@ const Login = ({ onLogin }) => {
       if (response.ok) {
         const result = await response.json();
         console.log('Cliente cadastrado com sucesso:', result);
-
-        // Verifique se o token está presente na resposta
-        const token = result.token; // Supondo que o token seja retornado na resposta
+        const token = result.token;
         if (token) {
-          onLogin(token); // Chame a função de login com o token
+          onLogin(token);
+          setAlertVisible(true); 
+      
+          
+          setTimeout(() => {
+            setAlertVisible(false);   
+            navigate('/home'); 
+          }, 3000); 
         } else {
           navigate('/home');
         }
       } else {
         const error = await response.json();
         console.error('Erro ao cadastrar cliente:', error);
-        alert(error.error); // Exibe o erro para o usuário
+        setError(error.message || 'Erro ao cadastrar cliente.'); 
       }
+      
     } catch (error) {
       console.error('Erro na requisição:', error);
+      setError('Erro na requisição'); 
     }
   };
 
   return (
     <div className="app-wrapper">
       <div className="app-container">
-      {alertVisible ? (
-          <Alert severity="success">
-            Cliente {name} cadastrado com sucesso.
-          </Alert>
-        ) : 
+        {alertVisible && <SimpleAlert />}
         <div className="sign-up-container">
           <h3>Crie uma conta</h3>
           <p>Preencha os campos abaixo para criar sua conta.</p>
           <form onSubmit={handleSubmit} className='form-content'>
             <TextField
+              inputRef={nameInputRef}
               value={name}
               onChange={(e) => setName(e.target.value)}
               id="standard-basic"
@@ -88,12 +107,15 @@ const Login = ({ onLogin }) => {
               }}
             />
             <TextField
+              inputRef={emailInputRef}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               id="standard-basic"
               label="Email"
               variant="standard"
               required
+              error={!!error && !email.endsWith('@gmail.com')}
+              helperText={error}
               sx={{
                 width: '300px',
                 margin: '10px 0px',
@@ -114,32 +136,40 @@ const Login = ({ onLogin }) => {
                 }
               }}
             />
-            <TextField
+            <MaskedInput
+              mask={['(', /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]}
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
-              id="standard-basic"
-              label="Telefone"
-              variant="standard"
-              required
-              sx={{
-                width: '300px',
-                margin: '10px 0px',
-                '& .MuiInputBase-input': {
-                  color: '#d1d1d1'
-                },
-                '& .MuiFormLabel-root': {
-                  color: '#d1d1d1',
-                  '&.Mui-focused': {
-                    color: '#d1d1d1',
-                  },
-                },
-                '& .MuiInput-underline:before': {
-                  borderBottomColor: '#d1d1d1',
-                },
-                '& .MuiInput-underline:after': {
-                  borderBottomColor: '#d1d1d1',
-                }
-              }}
+              render={(ref, props) => (
+                <TextField
+                  {...props}
+                  inputRef={ref}
+                  label="Telefone"
+                  variant="standard"
+                  required
+                  error={!!error && phone === ''}
+                  helperText={phone === '' ? error : ''}
+                  sx={{
+                    width: '300px',
+                    margin: '10px 0px',
+                    '& .MuiInputBase-input': {
+                      color: '#d1d1d1'
+                    },
+                    '& .MuiFormLabel-root': {
+                      color: '#d1d1d1',
+                      '&.Mui-focused': {
+                        color: '#d1d1d1',
+                      },
+                    },
+                    '& .MuiInput-underline:before': {
+                      borderBottomColor: '#d1d1d1',
+                    },
+                    '& .MuiInput-underline:after': {
+                      borderBottomColor: '#d1d1d1',
+                    }
+                  }}
+                />
+              )}
             />
             <Button
               type="submit"
@@ -160,7 +190,6 @@ const Login = ({ onLogin }) => {
             </Button>
           </form>
         </div>
-      }
       </div>
     </div>
   );
