@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './login.css';
 import Button from '@mui/material/Button';
@@ -13,6 +13,7 @@ const Login = ({ onLogin }) => {
   const [phone, setPhone] = useState('');
   const [alertVisible, setAlertVisible] = useState(false);
   const [error, setError] = useState(''); 
+  const [token, setToken] = useState(null);
   const navigate = useNavigate();
 
   const nameInputRef = useRef(null);
@@ -41,23 +42,12 @@ const Login = ({ onLogin }) => {
         },
         body: JSON.stringify({ nome: name, gmail: email, whats: phone }),
       });
-
       if (response.ok) {
         const result = await response.json();
         console.log('Cliente cadastrado com sucesso:', result);
-        const token = result.token;
-        if (token) {
-          onLogin(token);
-          setAlertVisible(true); 
-      
-          
-          setTimeout(() => {
-            setAlertVisible(false);   
-            navigate('/home'); 
-          }, 3000); 
-        } else {
-          navigate('/home');
-        }
+
+        setToken(result.token);
+        setAlertVisible(true);
       } else {
         const error = await response.json();
         console.error('Erro ao cadastrar cliente:', error);
@@ -70,10 +60,20 @@ const Login = ({ onLogin }) => {
     }
   };
 
+  useEffect(() => {
+    if (alertVisible && token) {
+      const timer = setTimeout(() => {
+        onLogin(token);
+      }, 1000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [alertVisible, token, onLogin]);
+
   return (
     <div className="app-wrapper">
       <div className="app-container">
-        {alertVisible && <SimpleAlert />}
+          {alertVisible && <SimpleAlert />}
         <div className="sign-up-container">
           <h3>Crie uma conta</h3>
           <p>Preencha os campos abaixo para criar sua conta.</p>

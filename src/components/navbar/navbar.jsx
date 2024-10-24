@@ -1,8 +1,10 @@
 import './navbar.css';
+import * as React from 'react';
+import Badge from '@mui/material/Badge';
 import { CiShoppingCart } from "react-icons/ci";
 import { Link } from 'react-router-dom';
 
-export default function Navbar({ onLogout }) {
+export default function Navbar({ onLogout, quantidadePedidos }) {
   return (
     <>
       <nav className="navbar">
@@ -10,8 +12,11 @@ export default function Navbar({ onLogout }) {
           <span></span>
           <span className='brand-text'>Bem-vindo ao Nosso Site!</span>
           <div className="shopping">
-            <span className='notification'></span>
-            <Link className='pedidos' to="/pedidos"><CiShoppingCart size={26}/></Link>
+            <Badge badgeContent={quantidadePedidos} color="secondary">
+              <Link className='pedidos' to="/pedidos">
+                <CiShoppingCart size={26} />
+              </Link>
+            </Badge>
           </div>
         </div>
       </nav>

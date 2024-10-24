@@ -43,106 +43,89 @@ ImageCard.propTypes = {
 };
 
 const ItemPratos = () => {
+  const { quantidade } = useContext(PedidoContext); 
+
   const images = [
     {
-      src: 'https://i.imgur.com/dMwHmTW.jpeg',
-      alt: 'Prato delicioso',
-      price: 'R$34,90',
-      
+      src: 'https://i.pinimg.com/control/564x/9d/af/e1/9dafe123abaf350d64b0df29d5fbc43b.jpg',
+      alt: 'Prato de carne com legumes',
+      price: 34.90,
     },
     {
-      src: 'https://i.imgur.com/dMwHmTW.jpeg',
-      alt: 'Prato delicioso',
-      price: 'R$34,90',
-      
+      src: 'https://i.pinimg.com/control/564x/9d/af/e1/9dafe123abaf350d64b0df29d5fbc43b.jpg',
+      alt: 'Prato de frango grelhado',
+      price: 29.90,
     },
     {
-      src: 'https://i.imgur.com/dMwHmTW.jpeg',
-      alt: 'Prato delicioso',
-      price: 'R$34,90',
-      
+      src: 'https://i.pinimg.com/control/564x/9d/af/e1/9dafe123abaf350d64b0df29d5fbc43b.jpg',
+      alt: 'Prato de massa ao molho',
+      price: 24.90,
+    },{
+      src: 'https://i.pinimg.com/control/564x/9d/af/e1/9dafe123abaf350d64b0df29d5fbc43b.jpg',
+      alt: 'Prato de carne com legumes',
+      price: 34.90,
     },
     {
-      src: 'https://i.imgur.com/dMwHmTW.jpeg',
-      alt: 'Prato delicioso',
-      price: 'R$34,90',
-      
+      src: 'https://i.pinimg.com/control/564x/9d/af/e1/9dafe123abaf350d64b0df29d5fbc43b.jpg',
+      alt: 'Prato de carne com legumes',
+      price: 34.90,
     },
     {
-      src: 'https://i.imgur.com/dMwHmTW.jpeg',
-      alt: 'Prato delicioso',
-      price: 'R$34,90',
-      
+      src: 'https://i.pinimg.com/control/564x/9d/af/e1/9dafe123abaf350d64b0df29d5fbc43b.jpg',
+      alt: 'Prato de carne com legumes',
+      price: 34.90,
     },
     {
-      src: 'https://i.imgur.com/dMwHmTW.jpeg',
-      alt: 'Prato delicioso',
-      price: 'R$34,90',
-      
+      src: 'https://i.pinimg.com/control/564x/9d/af/e1/9dafe123abaf350d64b0df29d5fbc43b.jpg',
+      alt: 'Prato de carne com legumes',
+      price: 34.90,
     },
     {
-      src: 'https://i.imgur.com/dMwHmTW.jpeg',
-      alt: 'Prato delicioso',
-      price: 'R$34,90',
-      
+      src: 'https://i.pinimg.com/control/564x/9d/af/e1/9dafe123abaf350d64b0df29d5fbc43b.jpg',
+      alt: 'Prato de carne com legumes',
+      price: 34.90,
     },
     {
-      src: 'https://i.imgur.com/dMwHmTW.jpeg',
-      alt: 'Prato delicioso',
-      price: 'R$34,90',
-      
+      src: 'https://i.pinimg.com/control/564x/9d/af/e1/9dafe123abaf350d64b0df29d5fbc43b.jpg',
+      alt: 'Prato de carne com legumes',
+      price: 34.90,
     },
     {
-      src: 'https://i.imgur.com/dMwHmTW.jpeg',
-      alt: 'Prato delicioso',
-      price: 'R$34,90',
-      
+      src: 'https://i.pinimg.com/control/564x/9d/af/e1/9dafe123abaf350d64b0df29d5fbc43b.jpg',
+      alt: 'Prato de carne com legumes',
+      price: 34.90,
     },
     {
-      src: 'https://i.imgur.com/dMwHmTW.jpeg',
-      alt: 'Prato delicioso',
-      price: 'R$34,90',
-      
+      src: 'https://i.pinimg.com/control/564x/9d/af/e1/9dafe123abaf350d64b0df29d5fbc43b.jpg',
+      alt: 'Prato de carne com legumes',
+      price: 34.90,
     },
     {
-      src: 'https://i.imgur.com/dMwHmTW.jpeg',
-      alt: 'Prato delicioso',
-      price: 'R$34,90',
-      
+      src: 'https://i.pinimg.com/control/564x/9d/af/e1/9dafe123abaf350d64b0df29d5fbc43b.jpg',
+      alt: 'Prato de carne com legumes',
+      price: 34.90,
     },
     {
-      src: 'https://i.imgur.com/dMwHmTW.jpeg',
-      alt: 'Prato delicioso',
-      price: 'R$34,90',
-      
+      src: 'https://i.pinimg.com/control/564x/9d/af/e1/9dafe123abaf350d64b0df29d5fbc43b.jpg',
+      alt: 'Prato de carne com legumes',
+      price: 34.90,
     },
     {
-      src: 'https://i.imgur.com/dMwHmTW.jpeg',
-      alt: 'Prato delicioso',
-      price: 'R$34,90',
-      
+      src: 'https://i.pinimg.com/control/564x/9d/af/e1/9dafe123abaf350d64b0df29d5fbc43b.jpg',
+      alt: 'Prato de carne com legumes',
+      price: 34.90,
     },
     {
-      src: 'https://i.imgur.com/dMwHmTW.jpeg',
-      alt: 'Prato delicioso',
-      price: 'R$34,90',
-      
+      src: 'https://i.pinimg.com/control/564x/9d/af/e1/9dafe123abaf350d64b0df29d5fbc43b.jpg',
+      alt: 'Prato de carne com legumes',
+      price: 34.90,
     },
     {
-      src: 'https://i.imgur.com/dMwHmTW.jpeg',
-      alt: 'Prato delicioso',
-      price: 'R$34,90',
-      
-    },
-    {
-      src: 'https://i.imgur.com/dMwHmTW.jpeg',
-      alt: 'Prato delicioso',
-      price: 'R$34,90',
-      
+      src: 'https://i.pinimg.com/control/564x/9d/af/e1/9dafe123abaf350d64b0df29d5fbc43b.jpg',
+      alt: 'Prato de carne com legumes',
+      price: 34.90,
     },
     
-    
-   
   ];
 
   return (
