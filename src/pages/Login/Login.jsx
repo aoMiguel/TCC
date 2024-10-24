@@ -69,7 +69,6 @@ const Login = ({ onLogin }) => {
       return () => clearTimeout(timer);
     }
   }, [alertVisible, token, onLogin]);
-
   return (
     <div className="app-wrapper">
       <div className="app-container">
