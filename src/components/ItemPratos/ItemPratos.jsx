@@ -1,11 +1,12 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
-import { GrAdd } from 'react-icons/gr';
+import { GrAdd, GrCheckmark } from 'react-icons/gr';
 import './ItemPratos.css';
 import { PedidoContext } from '../ItemPedido/PedidoContext';
 
 const ImageCard = ({ src, alt, price }) => {
-  const { adicionarPedido } = useContext(PedidoContext); 
+  const { adicionarPedido } = useContext(PedidoContext);
+  const [added, setAdded] = useState(false);
 
   const formattedPrice = price.toLocaleString('pt-BR', {
     style: 'currency',
@@ -14,8 +15,9 @@ const ImageCard = ({ src, alt, price }) => {
   });
 
   const handleAddToCart = () => {
-    const novoPedido = { src, alt, price }; 
-    adicionarPedido(novoPedido); 
+    const novoPedido = { src, alt, price };
+    adicionarPedido(novoPedido);
+    setAdded(true);
   };
 
   return (
@@ -26,11 +28,11 @@ const ImageCard = ({ src, alt, price }) => {
         <p className="price">{formattedPrice}</p>
       </div>
       <button
-        onClick={handleAddToCart} 
+        onClick={handleAddToCart}
         aria-label={`Adicionar ${alt} ao carrinho`}
         className="add-button"
       >
-        <GrAdd />
+        {added ? <GrCheckmark /> : <GrAdd />}
       </button>
     </div>
   );
@@ -43,7 +45,7 @@ ImageCard.propTypes = {
 };
 
 const ItemPratos = () => {
-  const { quantidade } = useContext(PedidoContext); 
+  const { quantidade } = useContext(PedidoContext);
 
   const images = [
     {
@@ -61,6 +63,11 @@ const ItemPratos = () => {
       alt: 'Prato de massa ao molho',
       price: 24.90,
     },{
+      src: 'https://i.pinimg.com/control/564x/9d/af/e1/9dafe123abaf350d64b0df29d5fbc43b.jpg',
+      alt: 'Prato de carne com legumes',
+      price: 34.90,
+    },
+    {
       src: 'https://i.pinimg.com/control/564x/9d/af/e1/9dafe123abaf350d64b0df29d5fbc43b.jpg',
       alt: 'Prato de carne com legumes',
       price: 34.90,

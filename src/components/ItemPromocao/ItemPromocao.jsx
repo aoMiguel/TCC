@@ -1,14 +1,16 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
-import { GrAdd } from "react-icons/gr";
+import { GrAdd, GrCheckmark } from "react-icons/gr";
 import { PedidoContext } from '../ItemPedido/PedidoContext'; 
 import './ItemPromocao.css';
 
 const ImageCard = ({ src, alt, price }) => {
   const { adicionarPedido } = useContext(PedidoContext);
+  const [added, setAdded] = useState(false);
 
   const handleAdd = () => {
-    adicionarPedido({ src, alt, price }); 
+    adicionarPedido({ src, alt, price });
+    setAdded(true);
   };
 
   const formattedPrice = price.toLocaleString('pt-BR', {
@@ -25,7 +27,7 @@ const ImageCard = ({ src, alt, price }) => {
         <p className="price">{formattedPrice}</p>
       </div>
       <button aria-label={`Adicionar ${alt} ao carrinho`} className="add-button" onClick={handleAdd}>
-        <GrAdd />
+        {added ? <GrCheckmark /> : <GrAdd />}
       </button>
     </div>
   );
@@ -39,12 +41,6 @@ ImageCard.propTypes = {
 
 const ItemPromocao = () => {
   const images = [
-    {
-      src: 'https://i.pinimg.com/control/564x/9d/af/e1/9dafe123abaf350d64b0df29d5fbc43b.jpg',
-      alt: 'Prato delicioso',
-      price: 24.90,
-      
-    },
     {
       src: 'https://i.pinimg.com/control/564x/9d/af/e1/9dafe123abaf350d64b0df29d5fbc43b.jpg',
       alt: 'Prato delicioso',
