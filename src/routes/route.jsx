@@ -8,6 +8,7 @@ import NavBar from '../components/navbar/navbar';
 import Pedidos from '../pages/Pedidos/Pedidos';
 import Bebida from '../pages/Bebidas/Bebidas';
 import Promocao from '../pages/Promocao/Promocao';
+import Cardapio from '../pages/Cardapio/Cardapio'
 import './AppRoutes.css';
 
 const AppRoutes = () => {
@@ -45,6 +46,7 @@ const AppRoutes = () => {
                 <Route path="/pedidos" element={<ProtectedRoute element={<Pedidos />} />} />
                 <Route path="/bebidas" element={<ProtectedRoute element={<Bebida />} />} />
                 <Route path="/promocao" element={<ProtectedRoute element={<Promocao />} />} />
+                <Route path="/cardapio" element={<ProtectedRoute element={<Cardapio />} />} />
                 <Route path="*" element={<Navigate to="/home" />} />
               </Routes>
             </div>

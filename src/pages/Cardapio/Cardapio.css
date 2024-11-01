@@ -1,0 +1,10 @@
+.main-content {
+  flex: 1;
+  padding: 20px;
+}
+.intro-container {
+  text-align: center;
+  color: #ecf0f1;
+  margin: 3rem 0;
+}
+
