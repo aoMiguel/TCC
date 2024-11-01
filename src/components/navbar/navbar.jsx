@@ -29,12 +29,15 @@ export default function Navbar({ onLogout, quantidadePedidos }) {
           <li><Link className='link-categoria link-categoria-hover' to="/pratos">Pratos</Link></li>
           <li><Link className='link-categoria link-categoria-hover' to="/bebidas">Bebidas</Link></li>
           <li><Link className='link-categoria link-categoria-hover' to="/promocao">Promoções</Link></li>
-          <li><Link className='link-categoria link-categoria-hover' to="/cardapio">Cardapio</Link></li>
         </ul>
         <div className="logout-container"> 
-          <button className='link-categoria link-logout-hover' onClick={onLogout}>
-            <Link to="/login">LogOut</Link>
-          </button>
+          <Link 
+            className='link-categoria link-logout-hover' 
+            to="/login" 
+            onClick={onLogout}
+          >
+            Sair
+          </Link>
         </div>
       </div>
     </>
