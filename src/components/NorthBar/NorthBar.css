@@ -1,0 +1,60 @@
+.navbar {
+  position: fixed;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  top: 0;
+  width: 100%;
+  background: linear-gradient(0deg, rgba(249,87,56,1) 0%, rgba(87,30,20,1) 100%);;
+  padding: 20px 0px;
+  text-align: center;
+}
+
+.brand-text {
+  font-family: 'Lobster', cursive;
+  color: #fff;
+  font-size: 26px;
+  font-weight: bold;
+}
+
+.logo-text {
+  font-family: 'Lobster';
+  text-decoration: none;
+  color: #0D0C22;
+  font-size: 26px;
+  font-weight: bold;
+  margin-left: 80px;
+}
+
+.alinhar{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.shopping {
+  position: relative;
+  margin-right: 20px;
+}
+
+.notification {
+  position: absolute;
+  top: 0px;
+  right: 2px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #F05D5E;
+}
+
+.pedidos {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0 10px;
+  color: #fff;
+  position: relative;
+  background-color: transparent;
+}
+

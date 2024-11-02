@@ -14,11 +14,9 @@ const Login = ({ onLogin }) => {
   const [alertVisible, setAlertVisible] = useState(false);
   const [error, setError] = useState(''); 
   const [token, setToken] = useState(null);
-  const navigate = useNavigate();
 
   const nameInputRef = useRef(null);
   const emailInputRef = useRef(null);
-  const phoneInputRef = useRef(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
