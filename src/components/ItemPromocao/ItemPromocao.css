@@ -18,6 +18,9 @@
   width: 200px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+.item-h2{
+  color: black;
+}
 
 .image-card img {
   width: 100%;

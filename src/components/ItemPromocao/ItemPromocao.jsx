@@ -129,7 +129,7 @@ const ItemPromocao = () => {
 
   return (
     <>
-      <h2>Promoção</h2>
+      <h2 className='item-h2'>Promoção</h2>
       <div className="image-gallery">
         {images.map((image, index) => (
           <ImageCard

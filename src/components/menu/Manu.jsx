@@ -1,6 +1,5 @@
 import "./Menu.css"
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import RamenDiningIcon from '@mui/icons-material/RamenDining';
 import LocalBarIcon from '@mui/icons-material/LocalBar';
@@ -30,14 +29,16 @@ const Menu = ({ onModalLogout }) => {
           ))}
         </ul>
         <div className="logout-container">
-          <Link
+          <button
             className='link-categoria link-logout-hover'
-            to="/login"
-            onClick={onModalLogout}
+            onClick={(e) => {
+              e.preventDefault();
+              onModalLogout();
+            }}
           >
             Sair
             <LogoutIcon />
-          </Link>
+          </button>
         </div>
       </div>
     </>

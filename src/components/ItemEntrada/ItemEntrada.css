@@ -5,6 +5,9 @@
   padding: 20px 0;
   margin: 2rem 2rem;
 }
+.item-h2{
+  color: black;
+}
 
 .image-card {
   display: flex;

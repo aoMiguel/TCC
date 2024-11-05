@@ -115,7 +115,7 @@ const ItemBebida = () => {
 
   return (
     <>
-      <h2>Bebidas</h2>
+      <h2 className='item-h2'>Bebidas</h2>
       <div className="image-gallery">
         {images.map((image, index) => (
           <ImageCard

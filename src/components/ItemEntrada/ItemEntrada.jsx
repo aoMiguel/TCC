@@ -72,6 +72,7 @@ const ItemEntrada = () => {
 
   return (
     <>
+     <h2 className='item-h2'>Entrada</h2>
       <div className="image-gallery">
         {images.map((image, index) => (
           <Card
