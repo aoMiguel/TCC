@@ -5,15 +5,19 @@ import RamenDiningIcon from '@mui/icons-material/RamenDining';
 import LocalBarIcon from '@mui/icons-material/LocalBar';
 import SellIcon from '@mui/icons-material/Sell';
 import LogoutIcon from '@mui/icons-material/Logout';
+import FeaturedPlayListIcon from '@mui/icons-material/FeaturedPlayList';
 
-const categories = [
-  { name: "Entradas", path: "/entradas", Icon: MenuBookIcon },
-  { name: "Pratos", path: "/pratos", Icon: RamenDiningIcon },
-  { name: "Bebidas", path: "/bebidas", Icon: LocalBarIcon },
-  { name: "Promoções", path: "/promocao", Icon: SellIcon },
-];
 
-const Menu = ({ onModalLogout }) => {
+const Menu = ({ onModalLogout, restauranteName }) => {
+  
+  
+  const categories = [                              
+    { name: "Controle", path: `/${restauranteName}/controle`, Icon: FeaturedPlayListIcon },
+    { name: "Entradas", path: `/${restauranteName}/entradas`, Icon: MenuBookIcon },
+    { name: "Pratos", path: `/${restauranteName}/pratos`, Icon: RamenDiningIcon },
+    { name: "Bebidas", path: `/${restauranteName}/bebidas`, Icon: LocalBarIcon },
+    { name: "Promoções", path: `/${restauranteName}/promocao`, Icon: SellIcon },
+  ];
   return (
     <>
       <div className="menu">

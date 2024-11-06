@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Home from '../pages/Home/Home';
 import Login from '../pages/Login/Login';
 import Entradas from '../pages/Entradas/Entradas';
@@ -7,6 +7,7 @@ import Pratos from '../pages/Pratos/Pratos';
 import Pedidos from '../pages/Pedidos/Pedidos';
 import Bebida from '../pages/Bebidas/Bebidas';
 import Promocao from '../pages/Promocao/Promocao';
+import Controle from '../pages/Controle/Controle'
 import './AppRoutes.css';
 import NorthBar from '../components/NorthBar/NorthBar';
 import Menu from '../components/menu/Manu';
@@ -19,15 +20,24 @@ import PriorityHighIcon from '@mui/icons-material/PriorityHigh';
 import { Button } from '@mui/material';
 
 const AppRoutes = () => {
-  const [isAuth, setIsAuth] = useState(!!localStorage.getItem('authToken'));
+  const [isAuth, setIsAuth] = useState(false);
+  const [restauranteName, setRestauranteName] = useState("");
   const [open, setOpen] = useState(false);
   const handleModalLogoutOpen = () => setOpen(true);
   const handleModalLogoutClose = () => setOpen(false);
+  
+  
+  useEffect(() => {
+    const storedRestauranteName = localStorage.getItem('restaurante');
+    setRestauranteName(storedRestauranteName);
+    setIsAuth(!!localStorage.getItem('authToken'));
+  }, []);
 
   const handleLogin = (token) => {
     if (token) {
-      console.log('Token recebido:', token);
       localStorage.setItem('authToken', token);
+      const storedRestauranteName = localStorage.getItem('restaurante');
+      setRestauranteName(storedRestauranteName);
       setIsAuth(true);
     }
   };
@@ -49,11 +59,13 @@ const AppRoutes = () => {
 
   const handleLogout = () => {
     localStorage.removeItem('authToken');
+    localStorage.removeItem('restaurante');
+    setRestauranteName("")
     setIsAuth(false);
   };
 
   // Componente de rota protegida
-  const ProtectedRoute = ({ element: Component }) => {
+  const ProtectedRoute = ({ element: Component }) => {  
     return isAuth ? Component : <Navigate to="/login" />;
   };
 
@@ -62,8 +74,8 @@ const AppRoutes = () => {
       <div className="app-route-container">
         {isAuth ? (
           <>
-            <NorthBar />
-            <Menu onModalLogout={handleModalLogoutOpen} />
+            <NorthBar restauranteName={restauranteName} />
+            <Menu restauranteName={restauranteName} onModalLogout={handleModalLogoutOpen} />
             <Modal
               aria-labelledby="transition-modal-title"
               aria-describedby="transition-modal-description"
@@ -120,20 +132,21 @@ const AppRoutes = () => {
             </Modal>
             <div className="content">
               <Routes>
-                <Route path="/home" element={<ProtectedRoute element={<Home />} />} />
-                <Route path="/pratos" element={<ProtectedRoute element={<Pratos />} />} />
-                <Route path="/entradas" element={<ProtectedRoute element={<Entradas />} />} />
-                <Route path="/pedidos" element={<ProtectedRoute element={<Pedidos />} />} />
-                <Route path="/bebidas" element={<ProtectedRoute element={<Bebida />} />} />
-                <Route path="/promocao" element={<ProtectedRoute element={<Promocao />} />} />
-                <Route path="*" element={<Navigate to="/home" />} />
+                <Route path={`/${restauranteName}/home`}element={<ProtectedRoute element={<Home />} />} />
+                <Route path={`/${restauranteName}/pratos`}element={<ProtectedRoute element={<Pratos />} />} />
+                <Route path={`/${restauranteName}/entradas`}element={<ProtectedRoute element={<Entradas />} />} />
+                <Route path={`/${restauranteName}/pedidos`}element={<ProtectedRoute element={<Pedidos />} />} />
+                <Route path={`/${restauranteName}/bebidas`}element={<ProtectedRoute element={<Bebida />} />} />
+                <Route path={`/${restauranteName}/promocao`}element={<ProtectedRoute element={<Promocao />} />} />
+                <Route path={`/${restauranteName}/controle`}element={<ProtectedRoute element={<Controle />} />} />
+                <Route path={`/*`} element={<Navigate to={`/${restauranteName}/home`} />} />
               </Routes>
             </div>
           </>
         ) : (
           <Routes>
             <Route path="/login" element={<Login onLogin={handleLogin} />} />
-            <Route path="*" element={<Navigate to="/login" />} />
+            <Route path="/*" element={<Navigate to="/login" />} />
           </Routes>
         )}
       </div>
