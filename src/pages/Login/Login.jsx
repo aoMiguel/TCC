@@ -1,5 +1,4 @@
 import { useState, useRef, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import './login.css';
 import Button from '@mui/material/Button';
 import SendRoundedIcon from '@mui/icons-material/SendRounded';
@@ -23,44 +22,80 @@ const Login = ({ onLogin }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    localStorage.setItem('restaurante', restaurante);
-    console.log('Nome:', name, 'Email:', email, 'Phone:', phone);
 
-    if (!email.endsWith('@gmail.com')) {
-      setError('O email deve terminar com @gmail.com');
-      return;
-    }
-    if (!phone) {
-      setError('O campo de telefone é obrigatório');
-      return;
-    }
-    setError('');
-
-    try {
-      const response = await fetch('http://localhost:3333/cliente', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ nome: name, restaurante: restaurante, gmail: email, whats: phone }),
-      });
-      if (response.ok) {
-        const result = await response.json();
-        console.log('Cliente cadastrado com sucesso:', result);
-
-        setToken(result.token);
-        setAlertVisible(true);
-      } else {
-        const error = await response.json();
-        console.error('Erro ao cadastrar cliente:', error);
-        setError(error.message || 'Erro ao cadastrar cliente.');
+    if (cadastre) {
+      if (!email.endsWith('@gmail.com')) {
+        setError('O email deve terminar com @gmail.com');
+        return;
       }
+      if (!phone) {
+        setError('O campo de telefone é obrigatório');
+        return;
+      }
+      setError('');
 
-    } catch (error) {
-      console.error('Erro na requisição:', error);
-      setError('Erro na requisição');
+      try {
+        const response = await fetch('http://localhost:3333/cliente', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ nome: name, restaurante: restaurante, gmail: email, whats: phone }),
+        });
+        if (response.ok) {
+          const result = await response.json();
+          console.log('Cliente cadastrado com sucesso:', result);
+
+          setToken(result.token);
+          setAlertVisible(true);
+        } else {
+          const error = await response.json();
+          console.error('Erro ao cadastrar cliente:', error);
+          setError(error.message || 'Erro ao cadastrar cliente.');
+        }
+
+      } catch (error) {
+        console.error('Erro na requisição:', error);
+        setError('Erro na requisição');
+      }
+    } else {
+      if (!email.endsWith('@gmail.com')) {
+        setError('O email deve terminar com @gmail.com');
+        return;
+      }
+      setError('');
+
+      try {
+        const response = await fetch('http://localhost:3333/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ gmail: email }),
+        });
+        if (response.ok) {
+          const result = await response.json();
+          console.log('Login realizado com sucesso:', result);
+
+          if (result.token) {
+            setToken(result.token);
+            setAlertVisible(true);
+          } else {
+            setError('Token não recebido.');
+          }
+        } else {
+          const error = await response.json();
+          console.error('Erro ao fazer login:', error);
+          setError(error.message || 'Erro ao fazer login.');
+        }
+
+      } catch (error) {
+        console.error('Erro na requisição:', error);
+        setError('Erro na requisição');
+      }
     }
   };
+
 
   useEffect(() => {
     if (alertVisible && token) {
@@ -224,15 +259,17 @@ const Login = ({ onLogin }) => {
           ) : (
             <div>
               <h3>Fazer login</h3>
-              <p>Preencha os campos abaixo para criar sua conta.</p>
+              <p>Preencha os campos abaixo para fazer seu Login</p>
               <TextField
-                inputRef={nameInputRef}
-                value={name}
-                onChange={(e) => setName(e.target.value)}
+                inputRef={emailInputRef}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 id="standard-basic"
-                label="Nome"
+                label="Email"
                 variant="standard"
                 required
+                error={!!error && !email.endsWith('@gmail.com')}
+                helperText={error}
                 sx={{
                   width: '300px',
                   margin: '10px 0px',
@@ -252,47 +289,45 @@ const Login = ({ onLogin }) => {
                     borderBottomColor: '#d1d1d1',
                   }
                 }}
-                />
-                <Button
-                  variant="contained"
-                  sx={{
-                    width: '200px',
-                    justifyContent: 'space-between',
-                    alignContent: 'center',
-                    backgroundColor: '#C7462D',
-                    color: 'white',
-                    textTransform: 'none',
-                    margin: '10px 0px 10px 0px',
-                  }}
-                  startIcon={<></>}
-                  endIcon={<SendRoundedIcon />}
-                >
-                  Login
-                </Button>
-                <Button
-                  variant="contained"
-                  sx={{
-                    width: '200px',
-                    justifyContent: 'space-between',
-                    alignContent: 'center',
-                    backgroundColor: '#00000000',
-                    borderColor: "#C7462D",
-                    color: '#C7462D',
-                    border: "1px solid",
-                    textTransform: 'none',
-                    margin: '10px 0px 10px 0px',
-                  }}
-                  startIcon={<></>}
-                  endIcon={<SendRoundedIcon />}
-                  onClick={() => setCadastrese(!cadastre)}
-                >
-                  Cadastrar
-                </Button>
+              />
+              <Button
+                variant="contained"
+                onClick={handleSubmit}
+                sx={{
+                  width: '200px',
+                  justifyContent: 'space-between',
+                  alignContent: 'center',
+                  backgroundColor: '#C7462D',
+                  color: 'white',
+                  textTransform: 'none',
+                  margin: '10px 0px 10px 0px',
+                }}
+                startIcon={<></>}
+                endIcon={<SendRoundedIcon />}
+              >
+                Login
+              </Button>
+              <Button
+                variant="contained"
+                sx={{
+                  width: '200px',
+                  justifyContent: 'space-between',
+                  alignContent: 'center',
+                  backgroundColor: '#00000000',
+                  borderColor: "#C7462D",
+                  color: '#C7462D',
+                  border: "1px solid",
+                  textTransform: 'none',
+                  margin: '10px 0px 10px 0px',
+                }}
+                startIcon={<></>}
+                endIcon={<SendRoundedIcon />}
+                onClick={() => setCadastrese(!cadastre)}
+              >
+                Cadastrar
+              </Button>
             </div>
           )}
-
-
-
         </div>
       </div>
     </div>

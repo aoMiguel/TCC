@@ -9,7 +9,7 @@ export default function SimpleAlert() {
       severity="success"
       sx={{ backgroundColor: '#99FF99', color: '#000' }}
     >
-      Cadastrado com sucesso.
+       sucesso.
     </Alert>
   );
 }
