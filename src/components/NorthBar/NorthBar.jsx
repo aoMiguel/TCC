@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import LocalDiningIcon from '@mui/icons-material/LocalDining';
 
 export default function NorthBar({ quantidadePedidos, restauranteName }) {
+  console.log("Nome do restaurante:", restauranteName);
+
   return (
     <>
        <nav className="navbar">

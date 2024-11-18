@@ -46,6 +46,8 @@ const Login = ({ onLogin }) => {
           const result = await response.json();
           console.log('Cliente cadastrado com sucesso:', result);
 
+          localStorage.setItem('restaurante', restaurante);
+
           setToken(result.token);
           setAlertVisible(true);
         } else {
@@ -106,6 +108,12 @@ const Login = ({ onLogin }) => {
       return () => clearTimeout(timer);
     }
   }, [alertVisible, token, onLogin]);
+
+  useEffect(() => {
+    const storedRestauranteName = localStorage.getItem('restaurante');
+    setRestaurante(storedRestauranteName);
+  }, []);
+
   return (
     <div className="app-wrapper">
       <div className="app-container">
