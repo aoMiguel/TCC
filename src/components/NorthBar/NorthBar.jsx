@@ -9,7 +9,7 @@ export default function NorthBar({ quantidadePedidos, restauranteName }) {
     <>
        <nav className="navbar">
         <div className="alinhar">
-          <Link className='logo-text' to="/home"><LocalDiningIcon/> Menu <LocalDiningIcon/></Link>  
+          <Link className='logo-text' to="/home"><LocalDiningIcon/> MenuForge <LocalDiningIcon/></Link>  
           <span className='brand-text'>Bem-vindo ao {restauranteName}</span>
           <div className="shopping">
             <Badge badgeContent={quantidadePedidos} color="secondary">
