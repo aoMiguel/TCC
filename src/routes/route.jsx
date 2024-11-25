@@ -8,6 +8,8 @@ import Pedidos from '../pages/Pedidos/Pedidos';
 import Bebida from '../pages/Bebidas/Bebidas';
 import Promocao from '../pages/Promocao/Promocao';
 import Controle from '../pages/Controle/Controle'
+import HomePage from '../pages/HomePage/HomePage';
+import LoginRestaurante from '../pages/Login_Restaurante/Login_Restaurante';
 import './AppRoutes.css';
 import NorthBar from '../components/NorthBar/NorthBar';
 import Menu from '../components/menu/Manu';
@@ -145,10 +147,12 @@ const AppRoutes = () => {
           </>
         ) : (
           <Routes>
+             <Route path="/loginrestaurante" element={<LoginRestaurante/>} />
+            <Route path="/homepage" element={<HomePage/>} />
             <Route path="/login" element={<Login onLogin={handleLogin} />} />
-            <Route path="/*" element={<Navigate to="/login" />} />
+            <Route path="/*" element={<Navigate to="/homepage" />} />
           </Routes>
-        )}
+        )}  
       </div>
     </Router>
   );

@@ -1,0 +1,60 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+}
+
+.app-wrapper {
+  display: flex;
+  place-items: center;
+  min-width: 100vw;
+  min-height: 100vh;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-width: 100vw;
+  min-height: 100vh;
+}
+
+.sign-up-container {
+  padding: 2rem;
+  background: #1a1a1a;
+  border-radius: 20px 60px;
+  width: 400px;
+  margin: 2rem auto;
+  margin-top: 120px; 
+}
+.sign-up-container p {
+  font-size: 12px;
+  color: #BABABA;
+  margin-bottom: 1.5rem;
+}
+
+
+.sign-up-container h3 {
+  color: #C7462D;
+  font-size: 22px;
+}
+
+.sign-up-container p {
+  font-size: 12px;
+  color: #BABABA;
+  margin-bottom: 1.5rem;
+}
+
+form {
+  width: 100%;
+}
+
+.form-content{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

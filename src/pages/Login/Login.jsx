@@ -334,6 +334,7 @@ const Login = ({ onLogin }) => {
               >
                 Cadastrar
               </Button>
+              
             </div>
           )}
         </div>
