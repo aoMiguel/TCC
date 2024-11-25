@@ -76,7 +76,8 @@ const Login = ({ onLogin }) => {
           body: JSON.stringify({ gmail: email }),
         });
         if (response.ok) {
-          const result = await response.json();
+          const text = await response.text(); // Obtém a resposta como texto
+          const result = text ? JSON.parse(text) : {}; // Faz o parse do JSON se não estiver vazio
           console.log('Login realizado com sucesso:', result);
 
           if (result.token) {
@@ -86,7 +87,8 @@ const Login = ({ onLogin }) => {
             setError('Token não recebido.');
           }
         } else {
-          const error = await response.json();
+          const errorText = await response.text(); // Obtém a resposta de erro como texto
+          const error = errorText ? JSON.parse(errorText) : { message: 'Erro desconhecido' }; // Faz o parse do JSON se não estiver vazio
           console.error('Erro ao fazer login:', error);
           setError(error.message || 'Erro ao fazer login.');
         }
