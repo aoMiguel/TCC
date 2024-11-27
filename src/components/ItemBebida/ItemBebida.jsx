@@ -4,9 +4,9 @@ import { GrAdd, GrCheckmark } from "react-icons/gr";
 import { PedidoContext } from '../ItemPedido/PedidoContext';
 import './ItemBebida.css';
 
-const ImageCard = ({ src, alt, price }) => {
+const ImageCard = ({ src, alt, price, onAddToCart }) => {
   const { adicionarPedido } = useContext(PedidoContext);
-  const [added, setAdded] = useState(false);''
+  const [added, setAdded] = useState(false);
 
   const formattedPrice = price.toLocaleString('pt-BR', {
     style: 'currency',
@@ -18,6 +18,7 @@ const ImageCard = ({ src, alt, price }) => {
     const novoPedido = { src, alt, price };
     adicionarPedido(novoPedido);
     setAdded(true);
+    onAddToCart(src);
   };
 
   return (
@@ -42,9 +43,12 @@ ImageCard.propTypes = {
   src: PropTypes.string.isRequired,
   alt: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
+  onAddToCart: PropTypes.func.isRequired,
 };
 
 const ItemBebida = () => {
+  const [addedImage, setAddedImage] = useState(null);
+
   const images = [
     {
       src: 'https://i.pinimg.com/564x/ec/a3/4c/eca34c6b85076922a5435f72daef6a5a.jpg',
@@ -113,6 +117,10 @@ const ItemBebida = () => {
     }
   ];
 
+  const handleAddToCart = (src) => {
+    setAddedImage(src);
+  };
+
   return (
     <>
       <h2 className='item-h2'>Bebidas</h2>
@@ -123,9 +131,16 @@ const ItemBebida = () => {
             src={image.src}
             alt={image.alt}
             price={image.price}
+            onAddToCart={handleAddToCart}
           />
         ))}
       </div>
+      {addedImage && (
+        <div className="added-image">
+          <h3>Item Adicionado:</h3>
+          <img src={addedImage} alt="Item Adicionado" />
+        </div>
+      )}
     </>
   );
 };

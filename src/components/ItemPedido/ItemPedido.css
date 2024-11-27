@@ -23,3 +23,14 @@
     text-align: right;
     color: #333; 
 }
+
+.added-image {
+    margin-top: 20px;
+    text-align: center; 
+}
+
+.added-image img {
+    max-width: 100%; 
+    height: auto; 
+    border-radius: 5px; 
+}

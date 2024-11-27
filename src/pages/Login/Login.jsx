@@ -40,13 +40,15 @@ const Login = ({ onLogin }) => {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ nome: name, restaurante: restaurante, gmail: email, whats: phone }),
+          body: JSON.stringify({ 
+            nome: name, 
+            restaurante: restaurante, 
+            gmail: email, 
+            whats: phone }),
         });
         if (response.ok) {
           const result = await response.json();
           console.log('Cliente cadastrado com sucesso:', result);
-
-          localStorage.setItem('restaurante', restaurante);
 
           setToken(result.token);
           setAlertVisible(true);
@@ -82,6 +84,7 @@ const Login = ({ onLogin }) => {
 
           if (result.token) {
             setToken(result.token);
+            setRestaurante(email.split('@')[0]);
             setAlertVisible(true);
           } else {
             setError('Token não recebido.');
@@ -103,6 +106,7 @@ const Login = ({ onLogin }) => {
 
   useEffect(() => {
     if (alertVisible && token) {
+      console.log('Chamando onLogin com token:', token);
       const timer = setTimeout(() => {
         onLogin(token);
       }, 1000);
@@ -110,11 +114,6 @@ const Login = ({ onLogin }) => {
       return () => clearTimeout(timer);
     }
   }, [alertVisible, token, onLogin]);
-
-  useEffect(() => {
-    const storedRestauranteName = localStorage.getItem('restaurante');
-    setRestaurante(storedRestauranteName);
-  }, []);
 
   return (
     <div className="app-wrapper">
@@ -336,7 +335,6 @@ const Login = ({ onLogin }) => {
               >
                 Cadastrar
               </Button>
-              
             </div>
           )}
         </div>

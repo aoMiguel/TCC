@@ -13,6 +13,7 @@ const ItemPedido = () => {
             <div className="cart">
                 {pedidos.map((item, index) => (
                     <div key={index} className="cart-item">
+                        <img src={item.image} alt={item.alt} className="item-image" />
                         <span>{item.alt}</span>
                         <span>R$ {item.price.toFixed(2)}</span>
                     </div>

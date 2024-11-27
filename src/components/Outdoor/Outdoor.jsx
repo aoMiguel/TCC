@@ -2,9 +2,14 @@ import "./Outdoor.css"
 import { Button } from '@mui/material';
 import SellIcon from '@mui/icons-material/Sell';
 import { Link, useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
 
 export default function OutDoor() {
   const location = useLocation();
+
+  useEffect(() => {
+
+  }, [location.pathname]);
 
   return (
     <>
