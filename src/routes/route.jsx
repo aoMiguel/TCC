@@ -66,10 +66,10 @@ const AppRoutes = () => {
     setIsAuth(false);
   };
 
-  // Componente de rota protegida
-  const ProtectedRoute = ({ element: Component }) => {  
-    return isAuth ? Component : <Navigate to="/login" />;
-  };
+  // // Componente de rota protegida
+  // const ProtectedRoute = ({ element: Component }) => {  
+  //   return isAuth ? Component : <Navigate to="/login" />;
+  // };
 
   return (
     <Router>
@@ -134,13 +134,13 @@ const AppRoutes = () => {
             </Modal>
             <div className="content">
               <Routes>
-                <Route path={`/${restauranteName}/home`}element={<ProtectedRoute element={<Home />} />} />
-                <Route path={`/${restauranteName}/pratos`}element={<ProtectedRoute element={<Pratos />} />} />
-                <Route path={`/${restauranteName}/entradas`}element={<ProtectedRoute element={<Entradas />} />} />
-                <Route path={`/${restauranteName}/pedidos`}element={<ProtectedRoute element={<Pedidos />} />} />
-                <Route path={`/${restauranteName}/bebidas`}element={<ProtectedRoute element={<Bebida />} />} />
-                <Route path={`/${restauranteName}/promocao`}element={<ProtectedRoute element={<Promocao />} />} />
-                <Route path={`/${restauranteName}/controle`}element={<ProtectedRoute element={<Controle />} />} />
+                <Route path={`/${restauranteName}/home`} element={<Home />} />
+                <Route path={`/${restauranteName}/pratos`} element={<Pratos />} />
+                <Route path={`/${restauranteName}/entradas`}element={<Entradas />} /> 
+                <Route path={`/${restauranteName}/pedidos`}element={<Pedidos />} />
+                <Route path={`/${restauranteName}/bebidas`}element={<Bebida />} />
+                <Route path={`/${restauranteName}/promocao`}element={<Promocao />} />
+                <Route path={`/${restauranteName}/controle`}element={<Controle />} />
                 <Route path={`/*`} element={<Navigate to={`/${restauranteName}/home`} />} />
               </Routes>
             </div>
