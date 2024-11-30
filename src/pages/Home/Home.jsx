@@ -6,8 +6,6 @@ import ItemPromocao from '../../components/ItemPromocao/ItemPromocao';
 import OutDoor from '../../components/Outdoor/Outdoor';
 
 export default function Home() {
-    const storedRestauranteName = localStorage.getItem('restaurante');
-
     return (
         <>
             <OutDoor />

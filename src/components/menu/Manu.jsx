@@ -8,15 +8,15 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import FeaturedPlayListIcon from '@mui/icons-material/FeaturedPlayList';
 
 
-const Menu = ({ onModalLogout, restauranteName }) => {
+const Menu = ({ onModalLogout}) => {
   
   
   const categories = [                              
-    { name: "Controle", path: `/${restauranteName}/controle`, Icon: FeaturedPlayListIcon },
-    { name: "Entradas", path: `/${restauranteName}/entradas`, Icon: MenuBookIcon },
-    { name: "Pratos", path: `/${restauranteName}/pratos`, Icon: RamenDiningIcon },
-    { name: "Bebidas", path: `/${restauranteName}/bebidas`, Icon: LocalBarIcon },
-    { name: "Promoções", path: `/${restauranteName}/promocao`, Icon: SellIcon },
+    { name: "Controle", path: `/controle`, Icon: FeaturedPlayListIcon },
+    { name: "Entradas", path: `}/entradas`, Icon: MenuBookIcon },
+    { name: "Pratos", path: `/pratos`, Icon: RamenDiningIcon },
+    { name: "Bebidas", path: `/bebidas`, Icon: LocalBarIcon },
+    { name: "Promoções", path: `/promocao`, Icon: SellIcon },
   ];
   return (
     <>

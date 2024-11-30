@@ -1,10 +1,10 @@
-const Menu = ({ onModalLogout, restauranteName }) => {
+const Menu = ({ onModalLogout}) => {
   const categories = [
-    { name: "Entradas", path: `/${restauranteName}/entradas`, Icon: MenuBookIcon },
-    { name: "Pratos", path: `/${restauranteName}/pratos`, Icon: RamenDiningIcon },
-    { name: "Bebidas", path: `/${restauranteName}/bebidas`, Icon: LocalBarIcon },
-    { name: "Promoções", path: `/${restauranteName}/promocao`, Icon: SellIcon },
-    { name: "Controlador", path: `/${restauranteName}/controller`, Icon: LocalBarIcon },
+    { name: "Entradas", path: `/entradas`, Icon: MenuBookIcon },
+    { name: "Pratos", path: `/pratos`, Icon: RamenDiningIcon },
+    { name: "Bebidas", path: `/bebidas`, Icon: LocalBarIcon },
+    { name: "Promoções", path: `/promocao`, Icon: SellIcon },
+    { name: "Controlador", path: `/controller`, Icon: LocalBarIcon },
   ];
   
   return (

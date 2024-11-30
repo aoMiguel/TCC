@@ -23,23 +23,13 @@ import { Button } from '@mui/material';
 
 const AppRoutes = () => {
   const [isAuth, setIsAuth] = useState(false);
-  const [restauranteName, setRestauranteName] = useState("");
   const [open, setOpen] = useState(false);
   const handleModalLogoutOpen = () => setOpen(true);
   const handleModalLogoutClose = () => setOpen(false);
-  
-  
-  useEffect(() => {
-    const storedRestauranteName = localStorage.getItem('restaurante');
-    setRestauranteName(storedRestauranteName);
-    setIsAuth(!!localStorage.getItem('authToken'));
-  }, []);
 
   const handleLogin = (token) => {
     if (token) {
       localStorage.setItem('authToken', token);
-      const storedRestauranteName = localStorage.getItem('restaurante');
-      setRestauranteName(storedRestauranteName);
       setIsAuth(true);
     }
   };
@@ -61,8 +51,6 @@ const AppRoutes = () => {
 
   const handleLogout = () => {
     localStorage.removeItem('authToken');
-    localStorage.removeItem('restaurante');
-    setRestauranteName("")
     setIsAuth(false);
   };
 
@@ -76,8 +64,8 @@ const AppRoutes = () => {
       <div className="app-route-container">
         {isAuth ? (
           <>
-            <NorthBar restauranteName={restauranteName} />
-            <Menu restauranteName={restauranteName} onModalLogout={handleModalLogoutOpen} />
+            <NorthBar/>
+            <Menu onModalLogout={handleModalLogoutOpen} />
             <Modal
               aria-labelledby="transition-modal-title"
               aria-describedby="transition-modal-description"
@@ -134,14 +122,14 @@ const AppRoutes = () => {
             </Modal>
             <div className="content">
               <Routes>
-                <Route path={`/${restauranteName}/home`}element={<ProtectedRoute element={<Home />} />} />
-                <Route path={`/${restauranteName}/pratos`}element={<ProtectedRoute element={<Pratos />} />} />
-                <Route path={`/${restauranteName}/entradas`}element={<ProtectedRoute element={<Entradas />} />} />
-                <Route path={`/${restauranteName}/pedidos`}element={<ProtectedRoute element={<Pedidos />} />} />
-                <Route path={`/${restauranteName}/bebidas`}element={<ProtectedRoute element={<Bebida />} />} />
-                <Route path={`/${restauranteName}/promocao`}element={<ProtectedRoute element={<Promocao />} />} />
-                <Route path={`/${restauranteName}/controle`}element={<ProtectedRoute element={<Controle />} />} />
-                <Route path={`/*`} element={<Navigate to={`/${restauranteName}/home`} />} />
+                <Route path={`/home`}element={<ProtectedRoute element={<Home />} />} />
+                <Route path={`/pratos`}element={<ProtectedRoute element={<Pratos />} />} />
+                <Route path={`/entradas`}element={<ProtectedRoute element={<Entradas />} />} />
+                <Route path={`/pedidos`}element={<ProtectedRoute element={<Pedidos />} />} />
+                <Route path={`/bebidas`}element={<ProtectedRoute element={<Bebida />} />} />
+                <Route path={`/promocao`}element={<ProtectedRoute element={<Promocao />} />} />
+                <Route path={`/controle`}element={<ProtectedRoute element={<Controle />} />} />
+                <Route path={`/*`} element={<Navigate to={`/home`} />} />
               </Routes>
             </div>
           </>
