@@ -71,18 +71,18 @@ const LoginRestaurante = ({ onLogin }) => {
         const response = await fetch('http://localhost:3333/restaurante', {
           method: 'POST',
           headers: {
-          'Content-Type': 'application/json',
+            'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ 
+          body: JSON.stringify({
             cnpj,
             nome,
-            endereco, 
-            cep, 
-            cidade, 
-            bairro, 
-            num, 
-            compl, 
-            telefone, 
+            endereco,
+            cep,
+            cidade,
+            bairro,
+            num,
+            compl,
+            telefone,
             capacidade
           }),
         });
@@ -161,7 +161,7 @@ const LoginRestaurante = ({ onLogin }) => {
     <div className="app-wrapper">
       <div className="app-container">
         {alertVisible && <SimpleAlert />}
-        <div className="sign-up-container">
+        <div className={cadastre ? "sign-up-container-restaurant" : "sign-up-container"}>
 
 
           {cadastre ? (
@@ -169,187 +169,190 @@ const LoginRestaurante = ({ onLogin }) => {
               <h3>Crie uma conta</h3>
               <p>Preencha os campos abaixo para criar sua conta.</p>
               <form onSubmit={handleSubmit} className='form-content'>
-
-                <MaskedInput
-                  mask={[/\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/]}
-                  value={cnpj}
-                  onChange={(e) => setcnpj(e.target.value)}
-                  render={(ref, props) => (
-                    <TextField
-                      {...props}
-                      inputRef={ref}
-                      label="CNPJ"
-                      variant="standard"
-                      required
-                      error={!!error && cnpj === ''}
-                      helperText={cnpj === '' ? error : ''}
-                      sx={{
-                        width: '300px',
-                        margin: '10px 0px',
-                        '& .MuiInputBase-input': {
-                          color: '#d1d1d1'
-                        },
-                        '& .MuiFormLabel-root': {
-                          color: '#d1d1d1',
-                          '&.Mui-focused': {
-                            color: '#d1d1d1',
-                          },
-                        },
-                        '& .MuiInput-underline:before': {
-                          borderBottomColor: '#d1d1d1',
-                        },
-                        '& .MuiInput-underline:after': {
-                          borderBottomColor: '#d1d1d1',
-                        }
-                      }}
+                <div className="info_gerais">
+                  <div className="dados">
+                    <MaskedInput
+                      mask={[/\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/]}
+                      value={cnpj}
+                      onChange={(e) => setcnpj(e.target.value)}
+                      render={(ref, props) => (
+                        <TextField
+                          {...props}
+                          inputRef={ref}
+                          label="CNPJ"
+                          variant="standard"
+                          required
+                          error={!!error && cnpj === ''}
+                          helperText={cnpj === '' ? error : ''}
+                          sx={{
+                            width: '300px',
+                            margin: '10px 0px',
+                            '& .MuiInputBase-input': {
+                              color: '#d1d1d1'
+                            },
+                            '& .MuiFormLabel-root': {
+                              color: '#d1d1d1',
+                              '&.Mui-focused': {
+                                color: '#d1d1d1',
+                              },
+                            },
+                            '& .MuiInput-underline:before': {
+                              borderBottomColor: '#d1d1d1',
+                            },
+                            '& .MuiInput-underline:after': {
+                              borderBottomColor: '#d1d1d1',
+                            }
+                          }}
+                        />
+                      )}
                     />
-                  )}
-                />
-                <CustomTextField
-                  value={nome}
-                  onChange={(e) => setnome(e.target.value)}
-                  label="Nome"
-                  required
-                />
-                <CustomTextField
-                  value={endereco}
-                  onChange={(e) => setendereco(e.target.value)}
-                  label="Endereco"
-                  required
-                  helperText={error}
-                />
-                <MaskedInput
-                  mask={['(', /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]}
-                  value={telefone}
-                  onChange={(e) => settelefone(e.target.value)}
-                  render={(ref, props) => (
-                    <TextField
-                      {...props}
-                      inputRef={ref}
-                      label="Telefone"
-                      variant="standard"
+                    <CustomTextField
+                      value={nome}
+                      onChange={(e) => setnome(e.target.value)}
+                      label="Nome"
                       required
-                      error={!!error && telefone === ''}
-                      helperText={telefone === '' ? error : ''}
-                      sx={{
-                        width: '300px',
-                        margin: '10px 0px',
-                        '& .MuiInputBase-input': {
-                          color: '#d1d1d1'
-                        },
-                        '& .MuiFormLabel-root': {
-                          color: '#d1d1d1',
-                          '&.Mui-focused': {
-                            color: '#d1d1d1',
-                          },
-                        },
-                        '& .MuiInput-underline:before': {
-                          borderBottomColor: '#d1d1d1',
-                        },
-                        '& .MuiInput-underline:after': {
-                          borderBottomColor: '#d1d1d1',
-                        }
-                      }}
                     />
-                  )}
-                />
-                <MaskedInput
-                  mask={[/\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]}
-                  value={cep}
-                  onChange={(e) => setcep(e.target.value)}
-                  render={(ref, props) => (
-                    <TextField
-                      {...props}
-                      inputRef={ref}
-                      label="CEP"
+                    <CustomTextField
+                      value={endereco}
+                      onChange={(e) => setendereco(e.target.value)}
+                      label="Endereco"
                       required
-                      error={!!error && cep === ''}
-                      helperText={cep === '' ? error : ''}
-                      sx={{
-                        width: '300px',
-                        margin: '10px 0px',
-                        '& .MuiInputBase-input': {
-                          color: '#d1d1d1'
-                        },
-                        '& .MuiFormLabel-root': {
-                          color: '#d1d1d1',
-                          '&.Mui-focused': {
-                            color: '#d1d1d1',
-                          },
-                        },
-                        '& .MuiInput-underline:before': {
-                          borderBottomColor: '#d1d1d1',
-                        },
-                        '& .MuiInput-underline:after': {
-                          borderBottomColor: '#d1d1d1',
-                        }
-                      }}
+                      helperText={error}
                     />
-                  )}
-                />
-                <CustomTextField
-                  value={cidade}
-                  onChange={(e) => setcidade(e.target.value)}
-                  label="Cidade"
-                  required
-                  helperText={error}
-                />
-                <CustomTextField
-                  value={bairro}
-                  onChange={(e) => setbairro(e.target.value)}
-                  label="Bairro"
-                  required
-                  helperText={error}
-                />
-                <MaskedInput
-                  mask={[/\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/]}
-                  value={num}
-                  onChange={(e) => setnum(e.target.value)}
-                  render={(ref, props) => (
-                    <TextField
-                      {...props}
-                      inputRef={ref}
-                      label="Número"
+                    <MaskedInput
+                      mask={['(', /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]}
+                      value={telefone}
+                      onChange={(e) => settelefone(e.target.value)}
+                      render={(ref, props) => (
+                        <TextField
+                          {...props}
+                          inputRef={ref}
+                          label="Telefone"
+                          variant="standard"
+                          required
+                          error={!!error && telefone === ''}
+                          helperText={telefone === '' ? error : ''}
+                          sx={{
+                            width: '300px',
+                            margin: '10px 0px',
+                            '& .MuiInputBase-input': {
+                              color: '#d1d1d1'
+                            },
+                            '& .MuiFormLabel-root': {
+                              color: '#d1d1d1',
+                              '&.Mui-focused': {
+                                color: '#d1d1d1',
+                              },
+                            },
+                            '& .MuiInput-underline:before': {
+                              borderBottomColor: '#d1d1d1',
+                            },
+                            '& .MuiInput-underline:after': {
+                              borderBottomColor: '#d1d1d1',
+                            }
+                          }}
+                        />
+                      )}
+                    /></div>
+                  <div className="endereco">
+                    <MaskedInput
+                      mask={[/\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]}
+                      value={cep}
+                      onChange={(e) => setcep(e.target.value)}
+                      render={(ref, props) => (
+                        <TextField
+                          {...props}
+                          inputRef={ref}
+                          label="CEP"
+                          required
+                          error={!!error && cep === ''}
+                          helperText={cep === '' ? error : ''}
+                          sx={{
+                            width: '300px',
+                            margin: '10px 0px',
+                            '& .MuiInputBase-input': {
+                              color: '#d1d1d1'
+                            },
+                            '& .MuiFormLabel-root': {
+                              color: '#d1d1d1',
+                              '&.Mui-focused': {
+                                color: '#d1d1d1',
+                              },
+                            },
+                            '& .MuiInput-underline:before': {
+                              borderBottomColor: '#d1d1d1',
+                            },
+                            '& .MuiInput-underline:after': {
+                              borderBottomColor: '#d1d1d1',
+                            }
+                          }}
+                        />
+                      )}
+                    />
+                    <CustomTextField
+                      value={cidade}
+                      onChange={(e) => setcidade(e.target.value)}
+                      label="Cidade"
                       required
-                      error={!!error && num === ''}
-                      helperText={num === '' ? error : ''}
-                      sx={{
-                        width: '300px',
-                        margin: '10px 0px',
-                        '& .MuiInputBase-input': {
-                          color: '#d1d1d1'
-                        },
-                        '& .MuiFormLabel-root': {
-                          color: '#d1d1d1',
-                          '&.Mui-focused': {
-                            color: '#d1d1d1',
-                          },
-                        },
-                        '& .MuiInput-underline:before': {
-                          borderBottomColor: '#d1d1d1',
-                        },
-                        '& .MuiInput-underline:after': {
-                          borderBottomColor: '#d1d1d1',
-                        }
-                      }}
+                      helperText={error}
                     />
-                  )}
-                />
-                <CustomTextField
-                  value={compl}
-                  onChange={(e) => setcompl(e.target.value)}
-                  label="Complemento"
-                  required
-                  helperText={error}
-                />
-                <CustomTextField
-                  value={capacidade}
-                  onChange={(e) => setcapacidade(e.target.value)}
-                  label="Capacidade"
-                  required
-                  helperText={error}
-                />
-
+                    <CustomTextField
+                      value={bairro}
+                      onChange={(e) => setbairro(e.target.value)}
+                      label="Bairro"
+                      required
+                      helperText={error}
+                    />
+                    <MaskedInput
+                      mask={[/\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/]}
+                      value={num}
+                      onChange={(e) => setnum(e.target.value)}
+                      render={(ref, props) => (
+                        <TextField
+                          {...props}
+                          inputRef={ref}
+                          label="Número"
+                          required
+                          error={!!error && num === ''}
+                          helperText={num === '' ? error : ''}
+                          sx={{
+                            width: '300px',
+                            margin: '10px 0px',
+                            '& .MuiInputBase-input': {
+                              color: '#d1d1d1'
+                            },
+                            '& .MuiFormLabel-root': {
+                              color: '#d1d1d1',
+                              '&.Mui-focused': {
+                                color: '#d1d1d1',
+                              },
+                            },
+                            '& .MuiInput-underline:before': {
+                              borderBottomColor: '#d1d1d1',
+                            },
+                            '& .MuiInput-underline:after': {
+                              borderBottomColor: '#d1d1d1',
+                            }
+                          }}
+                        />
+                      )}
+                    />
+                    <CustomTextField
+                      value={compl}
+                      onChange={(e) => setcompl(e.target.value)}
+                      label="Complemento"
+                      required
+                      helperText={error}
+                    />
+                    <CustomTextField
+                      value={capacidade}
+                      onChange={(e) => setcapacidade(e.target.value)}
+                      label="Capacidade"
+                      required
+                      helperText={error}
+                    />
+                  </div>
+                </div>
 
                 <Button
                   type="submit"
@@ -379,7 +382,7 @@ const LoginRestaurante = ({ onLogin }) => {
                 label="Nome"
                 required
               />
-               <Button
+              <Button
                 variant="contained"
                 onClick={handleSubmit}
                 sx={{

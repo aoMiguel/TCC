@@ -1,12 +1,21 @@
+import "./Menu.css"
+import { Link } from 'react-router-dom';
+import MenuBookIcon from '@mui/icons-material/MenuBook';
+import RamenDiningIcon from '@mui/icons-material/RamenDining';
+import LocalBarIcon from '@mui/icons-material/LocalBar';
+import SellIcon from '@mui/icons-material/Sell';
+import LogoutIcon from '@mui/icons-material/Logout';
+import FeaturedPlayListIcon from '@mui/icons-material/FeaturedPlayList';
+
+
 const Menu = ({ onModalLogout}) => {
-  const categories = [
+  const categories = [                              
+    { name: "Controle", path: `/controle`, Icon: FeaturedPlayListIcon },
     { name: "Entradas", path: `/entradas`, Icon: MenuBookIcon },
     { name: "Pratos", path: `/pratos`, Icon: RamenDiningIcon },
     { name: "Bebidas", path: `/bebidas`, Icon: LocalBarIcon },
     { name: "Promoções", path: `/promocao`, Icon: SellIcon },
-    { name: "Controlador", path: `/controller`, Icon: LocalBarIcon },
   ];
-  
   return (
     <>
       <div className="menu">
@@ -36,4 +45,6 @@ const Menu = ({ onModalLogout}) => {
       </div>
     </>
   );
-}; 
+};
+
+export default Menu;

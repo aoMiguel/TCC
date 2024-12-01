@@ -12,7 +12,7 @@ import HomePage from '../pages/HomePage/HomePage';
 import LoginRestaurante from '../pages/Login_Restaurante/Login_Restaurante';
 import './AppRoutes.css';
 import NorthBar from '../components/NorthBar/NorthBar';
-import Menu from '../components/menu/Manu';
+import Menu from '../components/menu/Menu';
 import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
@@ -66,6 +66,7 @@ const AppRoutes = () => {
           <>
             <NorthBar/>
             <Menu onModalLogout={handleModalLogoutOpen} />
+            {handleModalLogoutOpen && 
             <Modal
               aria-labelledby="transition-modal-title"
               aria-describedby="transition-modal-description"
@@ -120,6 +121,7 @@ const AppRoutes = () => {
                 </Box>
               </Fade>
             </Modal>
+            }
             <div className="content">
               <Routes>
                 <Route path={`/home`}element={<ProtectedRoute element={<Home />} />} />

@@ -1,0 +1,41 @@
+.sign-up-container-restaurant {
+  padding: 2rem;
+  background:#1a1a1a;
+  box-shadow: rgba(199, 70, 45, 0.09) 0px 2px 1px, rgba(199, 70, 45, 0.09) 0px 4px 2px, rgba(199, 70, 45, 0.09) 0px 8px 4px, rgba(199, 70, 45, 0.09) 0px 16px 8px, rgba(199, 70, 45, 0.09) 0px 32px 16px;
+  border: .6px solid #ce624c;
+  border-radius: 20px 60px;
+  width: 1200px;
+  margin: 2rem auto;
+  margin-top: 120px; 
+}
+
+.sign-up-container-restaurant h3 {
+  color: #C7462D;
+  font-family: 'Arial', sans-serif;
+  font-size: 22px;
+  letter-spacing: 1px;
+}
+
+.sign-up-container-restaurant p {
+  font-size: 12px;
+  color: #BABABA;
+  margin-bottom: 1.5rem;
+}
+
+.info_gerais{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 140px;
+}
+
+.dados{
+  display: flex;
+  flex-direction: column;
+}
+
+.endereco{
+  display: flex;
+  flex-direction: column;
+}

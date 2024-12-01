@@ -9,6 +9,7 @@ Frontend/src/components/ItemPedido/pedidos.css
 }
 
 .pedidos-item {
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -29,4 +30,19 @@ Frontend/src/components/ItemPedido/pedidos.css
 
 .pedidos-button:hover {
   background-color: #ff1a1a; 
+}
+.item-image{
+  width: 80px;
+  height: 80px;
+  border-radius: 100%;
+}
+
+.pedidos-item p {
+  color: black
+}
+
+.alterar {
+  display: flex;
+  flex-direction: column;
+  margin: 0px 20px;
 }
