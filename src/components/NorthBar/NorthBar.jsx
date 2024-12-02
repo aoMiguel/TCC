@@ -14,7 +14,7 @@ export default function NorthBar({ isRestaurante }) {
           <span className='brand-text'>Bem-vindo!</span>
           {isRestaurante ? (
             <div className="shopping">
-              <Badge badgeContent={quantidadePedidos} color="secondary">
+              <Badge /*</div>badgeContent={quantidadePedidos}</div>*/ color="secondary">
                 <Link className='pedidos' to={`/pedidos`}>
                   <CiShoppingCart size={26} />
                 </Link>

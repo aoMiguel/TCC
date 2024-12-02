@@ -9,6 +9,8 @@ import Bebida from '../pages/Bebidas/Bebidas';
 import Promocao from '../pages/Promocao/Promocao';
 import HomePage from '../pages/HomePage/HomePage';
 import LoginRestaurante from '../pages/Login_Restaurante/Login_Restaurante';
+import Controle from '../pages/Controle/Controle'
+import Pedido from '../pages/PedidoRestaurante/PedidoRestaurante'
 import './AppRoutes.css';
 import NorthBar from '../components/NorthBar/NorthBar';
 import Menu from '../components/menu/Menu';
@@ -81,7 +83,7 @@ const AppRoutes = () => {
       <div className="app-route-container">
         {isAuth && (
           <>
-            <NorthBar isRestaurant={false}/>
+            <NorthBar isRestaurante={true}/>
             <Menu onModalLogout={handleModalLogoutOpen} />
             {handleModalLogoutOpen &&
               <Modal
@@ -155,7 +157,7 @@ const AppRoutes = () => {
 
         {isAuthRestaurant && (
           <>
-            <NorthBar isRestaurant={true}/>
+            <NorthBar isRestaurante={false}/>
             <RestauranteMenu onModalLogout={handleModalLogoutOpen} />
             {handleModalLogoutOpen &&
               <Modal
@@ -215,7 +217,8 @@ const AppRoutes = () => {
             }
             <div className="content">
               <Routes>
-                <Route path={`/pratos`} element={<ProtectedRouteRestaurate element={<Pratos />} />} />
+                <Route path={`/controle`} element={<ProtectedRouteRestaurate element={<Controle />} />} />
+                <Route path={`/pedido`} element={<ProtectedRouteRestaurate element={<Pedido />} />} />
                 {/* <Route path={`/*`} element={<Navigate to={`/home`} />} /> */}
               </Routes>
             </div>
