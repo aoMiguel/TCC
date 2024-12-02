@@ -1,19 +1,14 @@
-import "./Menu.css"
+import "./MenuRestaurante.css"
 import { Link } from 'react-router-dom';
-import MenuBookIcon from '@mui/icons-material/MenuBook';
-import RamenDiningIcon from '@mui/icons-material/RamenDining';
 import LocalBarIcon from '@mui/icons-material/LocalBar';
 import SellIcon from '@mui/icons-material/Sell';
 import LogoutIcon from '@mui/icons-material/Logout';
 
 
-const Menu = ({ onModalLogout}) => {
+const RestauranteMenu = ({ onModalLogout }) => {
   const categories = [                              
-   
-    { name: "Entradas", path: `/entradas`, Icon: MenuBookIcon },
-    { name: "Pratos", path: `/pratos`, Icon: RamenDiningIcon },
-    { name: "Bebidas", path: `/bebidas`, Icon: LocalBarIcon },
-    { name: "Promoções", path: `/promocao`, Icon: SellIcon },
+    { name: "Controle", path: `/controle`, Icon: LocalBarIcon },
+    { name: "Pedido", path: `/pedido`, Icon: SellIcon },
   ];
   return (
     <>
@@ -46,4 +41,4 @@ const Menu = ({ onModalLogout}) => {
   );
 };
 
-export default Menu;
+export default RestauranteMenu;

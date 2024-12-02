@@ -7,22 +7,30 @@ import PropTypes from 'prop-types';
 import './Card.css';
 
 const Card = function ({ src, alt, price }) {
-  const { adicionarPedido } = useContext(PedidoContext);
+  const { adicionarPedido, removerPedido, pedidos } = useContext(PedidoContext);
   const [added, setAdded] = useState(false);
   const [count, setCount] = useState(1);
   const [open, setOpen] = useState(false);
-  const handleModalRemoverOpen = () => { setOpen(true) } ;
+  const handleModalRemoverOpen = () => { setOpen(true) };
   const handleModalRemoverClose = () => { setOpen(false); };
 
   const fecharModalCancelar = () => {
-    handleModalRemoverClose();
-    setAdded(true);
+    const index = pedidos.findIndex((pedido) => pedido.src === src);
+    if (index !== -1) {
+      removerPedido(index);
+    }
+    setAdded(false);
     setCount(1);
+    handleModalRemoverClose(); 
   };
   
+
   const handleIncrement = () => {
     if (count < 10) {
       setCount(count + 1);
+      const novoPedido = { src, alt, price}
+      adicionarPedido(novoPedido);
+
     }
   };
 
@@ -148,60 +156,60 @@ const Card = function ({ src, alt, price }) {
         }
       </div>
 
-      { open && (
+      {open && (
         <Modal
-        aria-labelledby="transition-modal-title"
-        aria-describedby="transition-modal-description"
-        open={open}
-        onClose={handleModalRemoverClose}
-        closeAfterTransition
-        slots={{ backdrop: Backdrop }}
-        slotProps={{
-          backdrop: {
-            timeout: 500,
-          },
-        }}
-      >
-        <Fade in={open}>
-          <Box sx={styleBox}>
-            <PriorityHighIcon  sx={{ color: '#B44647', padding: '4px', width: '32px', height: '32px', boxShadow: 'rgba(240, 93, 94, 0.1) 0px 0px 0px 8px', backgroundColor: 'rgba(240, 93, 94, 0.4)', borderRadius: '20px'}} />
-            <Typography id="transition-modal-title" variant="h6" component="h2" sx={{ marginTop: '20px', fontWeight: 'bold' }}>
-              Deseja remover {alt}?
-            </Typography>
-            <Typography id="transition-modal-description"  sx={{ mt: 2 }}>
-              Se desejar remover esse item cancele essa mensagem, caso contrario, clique em confirmar.
-            </Typography>
-            <div className="btn_mensagem">
-              <Button 
-                variant="outlined"
-                color= "error"
-                onClick={fecharModalCancelar}
-                sx={{
-                  '&:hover': {
-                    backgroundColor: '#F05D5E',
+          aria-labelledby="transition-modal-title"
+          aria-describedby="transition-modal-description"
+          open={open}
+          onClose={handleModalRemoverClose}
+          closeAfterTransition
+          slots={{ backdrop: Backdrop }}
+          slotProps={{
+            backdrop: {
+              timeout: 500,
+            },
+          }}
+        >
+          <Fade in={open}>
+            <Box sx={styleBox}>
+              <PriorityHighIcon sx={{ color: '#B44647', padding: '4px', width: '32px', height: '32px', boxShadow: 'rgba(240, 93, 94, 0.1) 0px 0px 0px 8px', backgroundColor: 'rgba(240, 93, 94, 0.4)', borderRadius: '20px' }} />
+              <Typography id="transition-modal-title" variant="h6" component="h2" sx={{ marginTop: '20px', fontWeight: 'bold' }}>
+                Deseja remover {alt}?
+              </Typography>
+              <Typography id="transition-modal-description" sx={{ mt: 2 }}>
+                Se desejar remover esse item cancele essa mensagem, caso contrario, clique em confirmar.
+              </Typography>
+              <div className="btn_mensagem">
+                <Button
+                  variant="outlined"
+                  color="error"
+                  onClick={fecharModalCancelar}
+                  sx={{
+                    '&:hover': {
+                      backgroundColor: '#F05D5E',
+                      color: 'white',
+                    },
+                  }}
+                >
+                  Cancelar
+                </Button>
+                <Button
+                  variant="contained"
+                  onClick={handleModalRemoverClose}
+                  sx={{
+                    alignContent: 'center',
+                    backgroundColor: '#4AC07F',
                     color: 'white',
-                  },
-                }}
-              >
-                Cancelar
-              </Button>
-              <Button 
-                variant="contained"
-                onClick={handleModalRemoverClose}
-                sx={{
-                  alignContent: 'center',
-                  backgroundColor: '#4AC07F', 
-                  color: 'white',
-                  '&:hover': {
-                    backgroundColor: '#215438'
-                  },
-                }}
-              >
-                Confirmar
-              </Button>
-            </div>
-          </Box>
-        </Fade>
+                    '&:hover': {
+                      backgroundColor: '#215438'
+                    },
+                  }}
+                >
+                  Confirmar
+                </Button>
+              </div>
+            </Box>
+          </Fade>
         </Modal>
       )}
     </>

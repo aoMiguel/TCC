@@ -1,80 +1,43 @@
+import { useEffect, useState } from 'react';
 import Card from '../Card/Card';
 import './ItemEntrada.css';
 
 const ItemEntrada = () => {
-  const images = [
-    {
-      src: 'https://i.pinimg.com/736x/d9/35/2f/d9352f8cf0023ef14f1f73e70f668ebe.jpg',
-      alt: 'Prato delicioso',
-      price: 24.90,
-    }, {
-      src: 'https://i.pinimg.com/736x/d9/35/2f/d9352f8cf0023ef14f1f73e70f668ebe.jpg',
-      alt: 'Prato delicioso',
-      price: 24.90,
-    }, {
-      src: 'https://i.pinimg.com/736x/d9/35/2f/d9352f8cf0023ef14f1f73e70f668ebe.jpg',
-      alt: 'Prato delicioso',
-      price: 24.90,
-    }, {
-      src: 'https://i.pinimg.com/736x/d9/35/2f/d9352f8cf0023ef14f1f73e70f668ebe.jpg',
-      alt: 'Prato delicioso',
-      price: 24.90,
-    }, {
-      src: 'https://i.pinimg.com/736x/d9/35/2f/d9352f8cf0023ef14f1f73e70f668ebe.jpg',
-      alt: 'Prato delicioso',
-      price: 24.90,
-    }, {
-      src: 'https://i.pinimg.com/736x/d9/35/2f/d9352f8cf0023ef14f1f73e70f668ebe.jpg',
-      alt: 'Prato delicioso',
-      price: 24.90,
-    }, {
-      src: 'https://i.pinimg.com/736x/d9/35/2f/d9352f8cf0023ef14f1f73e70f668ebe.jpg',
-      alt: 'Prato delicioso',
-      price: 24.90,
-    }, {
-      src: 'https://i.pinimg.com/736x/d9/35/2f/d9352f8cf0023ef14f1f73e70f668ebe.jpg',
-      alt: 'Prato delicioso',
-      price: 24.90,
-    },{
-      src: 'https://i.pinimg.com/736x/d9/35/2f/d9352f8cf0023ef14f1f73e70f668ebe.jpg',
-      alt: 'Prato delicioso',
-      price: 24.90,
-    }, {
-      src: 'https://i.pinimg.com/736x/d9/35/2f/d9352f8cf0023ef14f1f73e70f668ebe.jpg',
-      alt: 'Prato delicioso',
-      price: 24.90,
-    }, {
-      src: 'https://i.pinimg.com/736x/d9/35/2f/d9352f8cf0023ef14f1f73e70f668ebe.jpg',
-      alt: 'Prato delicioso',
-      price: 24.90,
-    }, {
-      src: 'https://i.pinimg.com/736x/d9/35/2f/d9352f8cf0023ef14f1f73e70f668ebe.jpg',
-      alt: 'Prato delicioso',
-      price: 24.90,
-    },{
-      src: 'https://i.pinimg.com/736x/d9/35/2f/d9352f8cf0023ef14f1f73e70f668ebe.jpg',
-      alt: 'Prato delicioso',
-      price: 24.90,
-    }, {
-      src: 'https://i.pinimg.com/736x/d9/35/2f/d9352f8cf0023ef14f1f73e70f668ebe.jpg',
-      alt: 'Prato delicioso',
-      price: 24.90,
-    }, {
-      src: 'https://i.pinimg.com/736x/d9/35/2f/d9352f8cf0023ef14f1f73e70f668ebe.jpg',
-      alt: 'Prato delicioso',
-      price: 24.90,
-    }, {
-      src: 'https://i.pinimg.com/736x/d9/35/2f/d9352f8cf0023ef14f1f73e70f668ebe.jpg',
-      alt: 'Prato delicioso',
-      price: 24.90,
+  const [entrada, setEntrada] = useState([]);
+
+  const fazerRequisicao = async () => {
+    const response = await fetch('http://localhost:3333/pratos', {
+      method: 'GET'
+    });
+
+    try {
+      const data = await response.json();
+      const filterEntrada = data.filter((e)=> {
+        return e.tipoprato === "E"
+      });
+      const entrada = filterEntrada.map((item) => {
+        return {
+          src: item.foto,
+          alt: item.name,
+          price: parseFloat(item.price)
+        };
+      });
+
+      response.status == 200 && setEntrada(entrada);
+    } catch (error) {
+      console.error(error);
     }
-  ];
+  };
+
+  useEffect(() => {
+    fazerRequisicao();
+  }, []);
 
   return (
     <>
      <h2 className='item-h2'>Entrada</h2>
       <div className="image-gallery">
-        {images.map((image, index) => (
+        {entrada.map((image, index) => (
           <Card
             key={index}
             src={image.src}
@@ -85,6 +48,6 @@ const ItemEntrada = () => {
       </div>
     </>
   );
-};
+}
 
 export default ItemEntrada;

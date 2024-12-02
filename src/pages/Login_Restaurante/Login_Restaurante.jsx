@@ -74,25 +74,27 @@ const LoginRestaurante = ({ onLogin }) => {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            cnpj,
-            nome,
-            endereco,
-            cep,
-            cidade,
-            bairro,
-            num,
-            compl,
-            telefone,
-            capacidade
-          }),
+            cnpj : cnpj ,
+            nome : nome,
+            endereco : endereco,
+            cep : cep,
+            cidade : cidade,
+            bairro : bairro,
+            num : num,
+            compl : compl,
+            telefone : telefone,
+            capacidade : capacidade
+          })
         });
 
         if (response.ok) {
-          const result = await response.json();
+          const text = await response.text(); 
+          const result = text ? JSON.parse(text) : {};
           console.log('Restaurante cadastrado com sucesso:', result.message);
+           
           setToken(result.token);
           setAlertVisible(true);
-          navigate(`/${nome}/home`);
+
         } else {
           const errorText = await response.text();
           const error = errorText ? JSON.parse(errorText) : { message: 'Erro desconhecido' };
@@ -111,12 +113,12 @@ const LoginRestaurante = ({ onLogin }) => {
       setError('');
 
       try {
-        const response = await fetch('http://localhost:3333/restaurante', {
+        const response = await fetch('http://localhost:3333/loginderestaurante', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ nome: nome }),
+          body: JSON.stringify({ cnpj: cnpj }),
         });
 
         if (response.ok) {
@@ -127,6 +129,7 @@ const LoginRestaurante = ({ onLogin }) => {
           if (result.token) {
             setToken(result.token);
             setAlertVisible(true);
+
           } else {
             setError('Token não recebido.');
           }
@@ -149,13 +152,14 @@ const LoginRestaurante = ({ onLogin }) => {
 
   useEffect(() => {
     if (alertVisible && token) {
+      console.log('Chamando onLogin com token:', token);
       const timer = setTimeout(() => {
-        onLogin(token);
+        onLogin(token)
       }, 1000);
 
       return () => clearTimeout(timer);
     }
-  }, [alertVisible, token, onLogin]);
+  }, [alertVisible, token,onLogin ]);
 
   return (
     <div className="app-wrapper">
@@ -355,7 +359,7 @@ const LoginRestaurante = ({ onLogin }) => {
                 </div>
 
                 <Button
-                  type="submit"
+                  type= "submit"
                   variant="contained"
                   sx={{
                     width: '200px',
@@ -368,7 +372,7 @@ const LoginRestaurante = ({ onLogin }) => {
                   }}
                   endIcon={<SendRoundedIcon />}
                 >
-                  Cadastrar
+                  Cadastra-se
                 </Button>
               </form>
             </div>
@@ -377,9 +381,9 @@ const LoginRestaurante = ({ onLogin }) => {
               <h3>Fazer login</h3>
               <p>Preencha os campos abaixo para fazer seu Login</p>
               <CustomTextField
-                value={nome}
-                onChange={(e) => setnome(e.target.value)}
-                label="Nome"
+                value={cnpj}
+                onChange={(e) => setcnpj(e.target.value)}
+                label="CNPJ"
                 required
               />
               <Button

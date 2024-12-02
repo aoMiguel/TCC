@@ -4,7 +4,6 @@ import Card from '../Card/Card';
 
 const ItemBebida = () => {
   const [bebidas, setBebidas] = useState([]);
-  // const [addedImage, setAddedImage] = useState(null);
 
   const fazerRequisicao = async () => {
     const response = await fetch('http://localhost:3333/pratos', {
@@ -13,11 +12,14 @@ const ItemBebida = () => {
 
     try {
       const data = await response.json();
-      const bebidas = data.map((item) => {
+      const filterBebidas = data.filter((e)=> {
+        return e.tipoprato === "B"
+      });
+      const bebidas = filterBebidas.map((item) => {
         return {
           src: item.foto,
           alt: item.name,
-          price: item.price
+          price: parseFloat(item.price)
         };
       });
 
@@ -31,10 +33,6 @@ const ItemBebida = () => {
     fazerRequisicao();
   }, []);
 
-  // const handleAddToCart = (src) => {
-  //   setAddedImage(src);
-  // };
-
   return (
     <>
       <h2 className='item-h2'>Bebidas</h2>
@@ -45,16 +43,9 @@ const ItemBebida = () => {
             src={image.src}
             alt={image.alt}
             price={image.price}
-          // onAddToCart={handleAddToCart}
           />
         ))}
       </div>
-      {/* {addedImage && (
-        <div className="added-image">
-          <h3>Item Adicionado:</h3>
-          <img src={addedImage} alt="Item Adicionado" />
-        </div>
-      )} */}
     </>
   );
 };

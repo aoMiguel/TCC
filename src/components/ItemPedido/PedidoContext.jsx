@@ -10,9 +10,12 @@ export const PedidoProvider = ({ children }) => {
     setPedidos((prev) => [...prev, novoPedido]);
     setQuantidade((prev) => prev + 1); 
   };
-
+  const removerPedido = (index) => {
+    setPedidos((prev) => prev.filter((_, i) => i !== index));
+    setQuantidade((prev) => prev - 1);
+  };
   return (
-    <PedidoContext.Provider value={{ pedidos, adicionarPedido, quantidade }}>
+    <PedidoContext.Provider value={{ pedidos, adicionarPedido, quantidade, removerPedido}}>
       {children}
     </PedidoContext.Provider>
   );

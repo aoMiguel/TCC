@@ -23,17 +23,11 @@ const Pedidos = ({ record }) => {
     console.log(record)
   }, [record]);
 
-  // const handleAddClick = () => {
-  //   adicionarPedido(); 
-  //   setShowAlert(true); 
-  //   setTimeout(() => setShowAlert(false), 3000); 
-  // };
-
   return (
     <div>
       <h2 style={{ color: 'black' }}>Pedidos</h2>
       {error && <div className="error">{error}</div>}
-      {/* <button onClick={handleAddClick}>Adicionar Pedido</button>  */}
+    
       <ul>
         {record && record.length > 0 ? (
           record.map((item, index) => (

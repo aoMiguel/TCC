@@ -1,104 +1,43 @@
-import { useContext } from 'react';
+import { useEffect, useState } from 'react';
 import './ItemPratos.css';
 import Card from '../Card/Card';
-import { PedidoContext } from '../ItemPedido/PedidoContext';
 
 const ItemPratos = () => {
-  const { quantidade } = useContext(PedidoContext);
+  const [pratos, setPratos] = useState([]);
 
-  const images = [
-    {
-      src: 'https://i.pinimg.com/control/564x/9d/af/e1/9dafe123abaf350d64b0df29d5fbc43b.jpg',
-      alt: 'Prato de carne com legumes',
-      price: 34.90,
-    },
-    {
-      src: 'https://i.pinimg.com/control/564x/9d/af/e1/9dafe123abaf350d64b0df29d5fbc43b.jpg',
-      alt: 'Prato de frango grelhado',
-      price: 29.90,
-    },
-    {
-      src: 'https://i.pinimg.com/control/564x/9d/af/e1/9dafe123abaf350d64b0df29d5fbc43b.jpg',
-      alt: 'Prato de massa ao molho',
-      price: 24.90,
-    },{
-      src: 'https://i.pinimg.com/control/564x/9d/af/e1/9dafe123abaf350d64b0df29d5fbc43b.jpg',
-      alt: 'Prato de carne com legumes',
-      price: 34.90,
-    },
-    {
-      src: 'https://i.pinimg.com/control/564x/9d/af/e1/9dafe123abaf350d64b0df29d5fbc43b.jpg',
-      alt: 'Prato de carne com legumes',
-      price: 34.90,
-    },
-    {
-      src: 'https://i.pinimg.com/control/564x/9d/af/e1/9dafe123abaf350d64b0df29d5fbc43b.jpg',
-      alt: 'Prato de carne com legumes',
-      price: 34.90,
-    },
-    {
-      src: 'https://i.pinimg.com/control/564x/9d/af/e1/9dafe123abaf350d64b0df29d5fbc43b.jpg',
-      alt: 'Prato de carne com legumes',
-      price: 34.90,
-    },
-    {
-      src: 'https://i.pinimg.com/control/564x/9d/af/e1/9dafe123abaf350d64b0df29d5fbc43b.jpg',
-      alt: 'Prato de carne com legumes',
-      price: 34.90,
-    },
-    {
-      src: 'https://i.pinimg.com/control/564x/9d/af/e1/9dafe123abaf350d64b0df29d5fbc43b.jpg',
-      alt: 'Prato de carne com legumes',
-      price: 34.90,
-    },
-    {
-      src: 'https://i.pinimg.com/control/564x/9d/af/e1/9dafe123abaf350d64b0df29d5fbc43b.jpg',
-      alt: 'Prato de carne com legumes',
-      price: 34.90,
-    },
-    {
-      src: 'https://i.pinimg.com/control/564x/9d/af/e1/9dafe123abaf350d64b0df29d5fbc43b.jpg',
-      alt: 'Prato de carne com legumes',
-      price: 34.90,
-    },
-    {
-      src: 'https://i.pinimg.com/control/564x/9d/af/e1/9dafe123abaf350d64b0df29d5fbc43b.jpg',
-      alt: 'Prato de carne com legumes',
-      price: 34.90,
-    },
-    {
-      src: 'https://i.pinimg.com/control/564x/9d/af/e1/9dafe123abaf350d64b0df29d5fbc43b.jpg',
-      alt: 'Prato de carne com legumes',
-      price: 34.90,
-    },
-    {
-      src: 'https://i.pinimg.com/control/564x/9d/af/e1/9dafe123abaf350d64b0df29d5fbc43b.jpg',
-      alt: 'Prato de carne com legumes',
-      price: 34.90,
-    },
-    {
-      src: 'https://i.pinimg.com/control/564x/9d/af/e1/9dafe123abaf350d64b0df29d5fbc43b.jpg',
-      alt: 'Prato de carne com legumes',
-      price: 34.90,
-    },
-    {
-      src: 'https://i.pinimg.com/control/564x/9d/af/e1/9dafe123abaf350d64b0df29d5fbc43b.jpg',
-      alt: 'Prato de carne com legumes',
-      price: 34.90,
-    },
-    {
-      src: 'https://i.pinimg.com/control/564x/9d/af/e1/9dafe123abaf350d64b0df29d5fbc43b.jpg',
-      alt: 'Prato de carne com legumes',
-      price: 34.90,
-    },
+  const fazerRequisicao = async () => {
+    const response = await fetch('http://localhost:3333/pratos', {
+      method: 'GET'
+    });
     
-  ];
+    try {
+      const data = await response.json();
+      const filterPrato = data.filter((e) => {
+        return e.tipoprato === "P"
+      });
+      const pratos = filterPrato.map((item) => {
+        return {
+          src: item.foto,
+          alt: item.name,
+          price: parseFloat(item.price)
+        };
+      });
+
+      response.status == 200 && setPratos(pratos);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    fazerRequisicao();
+  }, []);
 
   return (
     <>
       <h2 className='item-h2'>Pratos</h2>
       <div className="image-gallery">
-        {images.map((image, index) => (
+        {pratos.map((image, index) => (
           <Card
             key={index}
             src={image.src}
