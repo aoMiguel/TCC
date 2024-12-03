@@ -1,14 +1,16 @@
 import "./MenuRestaurante.css"
 import { Link } from 'react-router-dom';
 import LocalBarIcon from '@mui/icons-material/LocalBar';
-import SellIcon from '@mui/icons-material/Sell';
+import LocalDiningIcon from '@mui/icons-material/LocalDining';
 import LogoutIcon from '@mui/icons-material/Logout';
+import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
+
 
 
 const RestauranteMenu = ({ onModalLogout }) => {
   const categories = [                              
-    { name: "Controle", path: `/controle`, Icon: LocalBarIcon },
-    { name: "Pedido", path: `/pedido`, Icon: SellIcon },
+    { name: "Controle", path: `/controle`, Icon: ManageAccountsIcon },
+    { name: "Pedido", path: `/pedido`, Icon: LocalDiningIcon },
   ];
   return (
     <>

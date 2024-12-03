@@ -120,6 +120,9 @@ const LoginRestaurante = ({ onLogin }) => {
           },
           body: JSON.stringify({ cnpj: cnpj }),
         });
+        console.log("CNPJ enviado:", cnpj);
+
+        
         if (response.ok) {
           const text = await response.text();
           const result = text ? JSON.parse(text) : {};
