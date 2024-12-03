@@ -34,3 +34,7 @@
     height: auto; 
     border-radius: 5px; 
 }
+.desc{
+    color: black;
+    align-items: center;
+}

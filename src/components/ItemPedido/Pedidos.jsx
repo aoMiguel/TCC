@@ -37,22 +37,7 @@ const Pedidos = ({ record }) => {
                 <p>{item.alt}</p>
                 <p>R$ {item.price.toFixed(2)}</p>
               </li>
-              <div className="alterar">
-                <button
-                  style={{
-                    background: '#6696a9',
-                    color: 'white',
-                    border: 'none',
-                    borderRadius: '5px',
-                    cursor: 'pointer',
-                    margin: '10px 0',
-                    width: '38px',
-                    height: '38px',
-                  }}
-                  onClick={() => handleDelete(index)}
-                >
-                  <EditIcon />
-                </button>
+              <div className="alterar"> 
                 <button
                   style={{
                     background: '#F05D5E',

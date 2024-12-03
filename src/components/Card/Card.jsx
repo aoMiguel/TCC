@@ -6,7 +6,7 @@ import PriorityHighIcon from '@mui/icons-material/PriorityHigh';
 import PropTypes from 'prop-types';
 import './Card.css';
 
-const Card = function ({ src, alt, price }) {
+const Card = function ({ src, alt, price, pratosid }) {
   const { adicionarPedido, removerPedido, pedidos } = useContext(PedidoContext);
   const [added, setAdded] = useState(false);
   const [count, setCount] = useState(1);
@@ -28,9 +28,8 @@ const Card = function ({ src, alt, price }) {
   const handleIncrement = () => {
     if (count < 10) {
       setCount(count + 1);
-      const novoPedido = { src, alt, price}
+      const novoPedido = { src, alt, price, pratosid}
       adicionarPedido(novoPedido);
-
     }
   };
 
@@ -69,7 +68,7 @@ const Card = function ({ src, alt, price }) {
   };
 
   const handleAddToCart = () => {
-    const novoPedido = { src, alt, price };
+    const novoPedido = { src, alt, price, pratosid };
     adicionarPedido(novoPedido);
     setAdded(true);
     setCount(1);

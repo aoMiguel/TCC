@@ -116,11 +116,10 @@ const LoginRestaurante = ({ onLogin }) => {
         const response = await fetch('http://localhost:3333/loginderestaurante', {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/json',
+          'Content-Type': 'application/json',
           },
           body: JSON.stringify({ cnpj: cnpj }),
         });
-
         if (response.ok) {
           const text = await response.text();
           const result = text ? JSON.parse(text) : {};

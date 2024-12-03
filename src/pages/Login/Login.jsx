@@ -38,7 +38,7 @@ const Login = ({ onLogin }) => {
         const response = await fetch('http://localhost:3333/cliente', {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/json',
+          'Content-Type': 'application/json',
           },
           body: JSON.stringify({ 
             nome: name, 
@@ -73,7 +73,7 @@ const Login = ({ onLogin }) => {
         const response = await fetch('http://localhost:3333/login', {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/json',
+          'Content-Type': 'application/json',
           },
           body: JSON.stringify({ gmail: email }),
         });
@@ -102,7 +102,6 @@ const Login = ({ onLogin }) => {
       }
     }
   };
-
 
   useEffect(() => {
     if (alertVisible && token) {

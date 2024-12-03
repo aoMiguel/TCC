@@ -16,10 +16,13 @@ const ItemPratos = () => {
         return e.tipoprato === "P"
       });
       const pratos = filterPrato.map((item) => {
+        console.log(item)
         return {
           src: item.foto,
           alt: item.name,
+          pratosid: item.pratosid,
           price: parseFloat(item.price)
+          
         };
       });
 
@@ -42,6 +45,7 @@ const ItemPratos = () => {
             key={index}
             src={image.src}
             alt={image.alt}
+            pratosid={image.pratosid} 
             price={image.price}
           />
         ))}

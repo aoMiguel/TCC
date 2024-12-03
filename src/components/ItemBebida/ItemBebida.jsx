@@ -19,6 +19,7 @@ const ItemBebida = () => {
         return {
           src: item.foto,
           alt: item.name,
+          pratosid: item.pratosid,
           price: parseFloat(item.price)
         };
       });
@@ -42,6 +43,7 @@ const ItemBebida = () => {
             key={index}
             src={image.src}
             alt={image.alt}
+            pratosid={image.pratosid}
             price={image.price}
           />
         ))}
