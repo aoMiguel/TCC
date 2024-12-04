@@ -106,8 +106,8 @@ const LoginRestaurante = ({ onLogin }) => {
         setError('Erro na requisição');
       }
     } else {
-      if (nome.trim() === '') {
-        setError('O nome não pode ser vazio');
+      if (cnpj.trim() === '') {
+        setError('O CNPJ não pode ser vazio');
         return;
       }
       setError('');
