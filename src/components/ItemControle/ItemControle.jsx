@@ -118,7 +118,7 @@ const ItemControle = () => {
       setSnackbarSeverity('error');
       setSnackbarOpen(true);
     }
-  };
+  }; 
 
   const handlePriceChange = (event) => {
     let value = event.target.value;
