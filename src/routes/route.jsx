@@ -219,7 +219,6 @@ const AppRoutes = () => {
               <Routes>
                 <Route path={`/controle`} element={<ProtectedRouteRestaurate element={<Controle />} />} />
                 <Route path={`/pedido`} element={<ProtectedRouteRestaurate element={<Pedido />} />} />
-                {/* <Route path={`/*`} element={<Navigate to={`/home`} />} /> */}
               </Routes>
             </div>
           </>

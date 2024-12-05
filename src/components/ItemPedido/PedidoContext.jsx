@@ -14,8 +14,12 @@ export const PedidoProvider = ({ children }) => {
     setPedidos((prev) => prev.filter((_, i) => i !== index));
     setQuantidade((prev) => prev - 1);
   };
+  const limparCarrinho = () => {
+    setPedidos([]);
+    setQuantidade(0); 
+  };
   return (
-    <PedidoContext.Provider value={{ pedidos, adicionarPedido, quantidade, removerPedido}}>
+    <PedidoContext.Provider value={{ pedidos, adicionarPedido, quantidade, removerPedido, limparCarrinho}}>
       {children}
     </PedidoContext.Provider>
   );

@@ -4,7 +4,7 @@ import Pedidos from './Pedidos';
 import './ItemPedido.css';
 
 const ItemPedido = () => {
-    const { pedidos } = useContext(PedidoContext);
+    const { pedidos, limparCarrinho } = useContext(PedidoContext);
     const [descricao, setDescricao] = useState('');
     const [itenspedido, setItenspedido] = useState([]);
     const [total, setTotal] = useState('');
@@ -46,6 +46,9 @@ const ItemPedido = () => {
             if (response.ok) {
                 console.log('Pedido enviado com sucesso!');
                 alert('Pedido finalizado com sucesso!');
+                setDescricao('');
+                limparCarrinho();
+                
             } else {
                 console.error('Erro ao enviar o pedido:', response.statusText);
             }
