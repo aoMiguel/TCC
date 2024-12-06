@@ -29,6 +29,7 @@ const ItemPedido = () => {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    authorization: localStorage.getItem('authToken')
                 },
                 body: JSON.stringify({
                     itens: itenspedido,
@@ -50,6 +51,7 @@ const ItemPedido = () => {
                 limparCarrinho();
                 
             } else {
+                alert(response.body)
                 console.error('Erro ao enviar o pedido:', response.statusText);
             }
         } catch (error) {
