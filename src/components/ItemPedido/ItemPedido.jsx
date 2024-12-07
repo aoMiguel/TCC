@@ -1,13 +1,16 @@
 import { useContext, useEffect, useState } from 'react';
-import { PedidoContext } from './PedidoContext'
+import { PedidoContext } from './PedidoContext';
 import Pedidos from './Pedidos';
 import './ItemPedido.css';
+import Alert from '@mui/material/Alert';
+import CheckIcon from '@mui/icons-material/Check';
 
 const ItemPedido = () => {
     const { pedidos, limparCarrinho } = useContext(PedidoContext);
     const [descricao, setDescricao] = useState('');
     const [itenspedido, setItenspedido] = useState([]);
     const [total, setTotal] = useState('');
+    const [sucesso, setSucesso] = useState(false); // Estado para controlar o alerta
 
     useEffect(() => {
         setItenspedido(pedidos);
@@ -17,7 +20,6 @@ const ItemPedido = () => {
             return acc + (price * quant);
         }, 0));
     }, [pedidos]);
-
 
     const handleDescricaoChange = (e) => {
         setDescricao(e.target.value);
@@ -33,25 +35,27 @@ const ItemPedido = () => {
                 },
                 body: JSON.stringify({
                     itens: itenspedido,
-                    quant:  1,
+                    quant: 1,
                     status: "N",
                     datapedid: new Date().toISOString(),
                     valor_total: (total || 0) * 1,
                     desc_pedido: descricao || " ",
-                    // pratosid: "1c2c5397-9c09-45bf-b4b9-81d5dd1e71ba",
-                    // id_comanda_num: "95fa714c-7b26-4b67-a1cd-041b7eedc204",
                     idRestaurante: "7270890b-fbc8-4b7f-ad74-b4c10b94fef4"
                 }),
             });
 
             if (response.ok) {
                 console.log('Pedido enviado com sucesso!');
-                alert('Pedido finalizado com sucesso!');
+                setSucesso(true); // Alerta de sucesso
                 setDescricao('');
                 limparCarrinho();
-                
+
+                // Depois de 1 segundo, esconde o alerta
+                setTimeout(() => {
+                    setSucesso(false);
+                }, 1000); // 1 segundo
             } else {
-                alert(response.body)
+                alert(response.body);
                 console.error('Erro ao enviar o pedido:', response.statusText);
             }
         } catch (error) {
@@ -61,6 +65,26 @@ const ItemPedido = () => {
 
     return (
         <div>
+            {/* Exibe o alerta no topo da tela */}
+            {sucesso && (
+                <Alert
+                    icon={<CheckIcon fontSize="inherit" />}
+                    severity="success"
+                    sx={{
+                        position: 'fixed', // Fixa o alerta no topo
+                        top: '20px', // Distância do topo
+                        left: '50%', // Centraliza o alerta
+                        transform: 'translateX(-50%)', // Ajusta para que o alerta esteja centralizado
+                        backgroundColor: '#99FF99', 
+                        color: '#000', 
+                        marginBottom: '20px',
+                        zIndex: 1000, // Garante que o alerta ficará acima de outros elementos
+                    }}
+                >
+                    Sucesso!!
+                </Alert>
+            )}
+
             <h1>Carrinho de Compras</h1>
             <div className="cart">
                 <Pedidos
@@ -89,6 +113,7 @@ const ItemPedido = () => {
                     </label>
                 </div>
             </div>
+
             <button onClick={finalizarPedido}
                 style={{
                     background: 'green', color: 'white', border: 'none', padding:
@@ -97,7 +122,6 @@ const ItemPedido = () => {
             >
                 Finalizar
             </button>
-
         </div>
     );
 };

@@ -86,3 +86,9 @@ p {
   text-align: center;
   color: #555;
 }
+.verificado {
+  color: green; /* Cor do ícone de verificado */
+  font-size: 1.5em; /* Tamanho do ícone */
+  font-weight: bold; /* Se desejar deixar o ícone mais destacado */
+}
+

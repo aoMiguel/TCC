@@ -9,8 +9,8 @@ import Bebida from '../pages/Bebidas/Bebidas';
 import Promocao from '../pages/Promocao/Promocao';
 import HomePage from '../pages/HomePage/HomePage';
 import LoginRestaurante from '../pages/Login_Restaurante/Login_Restaurante';
-import Controle from '../pages/Controle/Controle'
-import Pedido from '../pages/PedidoRestaurante/PedidoRestaurante'
+import Controle from '../pages/Controle/Controle';
+import Pedido from '../pages/PedidoRestaurante/PedidoRestaurante';
 import './AppRoutes.css';
 import NorthBar from '../components/NorthBar/NorthBar';
 import Menu from '../components/menu/Menu';
@@ -20,13 +20,14 @@ import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import Typography from '@mui/material/Typography';
 import PriorityHighIcon from '@mui/icons-material/PriorityHigh';
-import RestauranteMenu from '../components/MenuRestaurante/MenuRestaurante'
+import RestauranteMenu from '../components/MenuRestaurante/MenuRestaurante';
 import { Button } from '@mui/material';
 
 const AppRoutes = () => {
   const [isAuth, setIsAuth] = useState(false);
   const [isAuthRestaurant, setIsAuthRestaurant] = useState(false);
   const [open, setOpen] = useState(false);
+
   const handleModalLogoutOpen = () => setOpen(true);
   const handleModalLogoutClose = () => setOpen(false);
 
@@ -37,14 +38,32 @@ const AppRoutes = () => {
     }
   };
 
-  const handleLoginRetaurante = (token) => {
+  const handleLoginRestaurant = (token) => {
     if (token) {
       localStorage.setItem('authTokenRestaurante', token);
       setIsAuthRestaurant(true);
     }
   };
 
-  const style = {
+  const handleLogout = () => {
+    localStorage.removeItem('authToken');
+    setIsAuth(false);
+  };
+
+  const handleLogoutRestaurant = () => {
+    localStorage.removeItem('authTokenRestaurante');
+    setIsAuthRestaurant(false);
+  };
+
+  const ProtectedRoute = ({ element }) => {
+    return isAuth ? element : <Navigate to="/login" />;
+  };
+
+  const ProtectedRouteRestaurant = ({ element }) => {
+    return isAuthRestaurant ? element : <Navigate to="/loginrestaurante" />;
+  };
+
+  const modalStyle = {
     position: 'absolute',
     top: '50%',
     left: '50%',
@@ -59,88 +78,69 @@ const AppRoutes = () => {
     p: 6,
   };
 
-  const handleLogout = () => {
-    localStorage.removeItem('authToken');
-    setIsAuth(false);
-  };
-
-  const handleLogoutRestaurante = () => {
-    localStorage.removeItem('authTokenRestaurante');
-    setIsAuthRestaurant(false);
-  };
-
-  // Componente de rota protegida
-  const ProtectedRoute = ({ element: Component }) => {
-    return isAuth ? Component : <Navigate to="/login" />;
-  };
-
-  const ProtectedRouteRestaurate = ({ element: Component }) => {
-    return isAuthRestaurant ? Component : <Navigate to="/login" />;
-  };
-
   return (
     <Router>
       <div className="app-route-container">
+        {/* Rota de usuário autenticado */}
         {isAuth && (
           <>
-            <NorthBar isRestaurante={true}/>
+            <NorthBar isRestaurante={true} />
             <Menu onModalLogout={handleModalLogoutOpen} />
-            {handleModalLogoutOpen &&
-              <Modal
-                aria-labelledby="transition-modal-title"
-                aria-describedby="transition-modal-description"
-                open={open}
-                onClose={handleModalLogoutClose}
-                closeAfterTransition
-                slots={{ backdrop: Backdrop }}
-                slotProps={{
-                  backdrop: {
-                    timeout: 500,
-                  },
-                }}
-              >
-                <Fade in={open}>
-                  <Box sx={style}>
-                    <PriorityHighIcon sx={{ color: '#B44647', padding: '4px', width: '32px', height: '32px', boxShadow: 'rgba(240, 93, 94, 0.1) 0px 0px 0px 8px', backgroundColor: 'rgba(240, 93, 94, 0.4)', borderRadius: '20px' }} />
-                    <Typography id="transition-modal-title" variant="h6" component="h2" sx={{ marginTop: '22px', fontWeight: 'bold' }}>
-                      Confirmar Logout
-                    </Typography>
-                    <Typography id="transition-modal-description" sx={{ mt: 2 }}>
-                      Alterações não salvas serão perdidas. <br /> Você tem certeza de que deseja sair?
-                    </Typography>
-                    <div className="btn_mensagem">
-                      <Button
-                        variant="outlined"
-                        color="error"
-                        onClick={handleModalLogoutClose}
-                        sx={{
-                          '&:hover': {
-                            backgroundColor: '#F05D5E',
-                            color: 'white',
-                          },
-                        }}
-                      >
-                        Cancelar
-                      </Button>
-                      <Button
-                        variant="contained"
-                        onClick={handleLogout}
-                        sx={{
-                          alignContent: 'center',
-                          backgroundColor: '#4AC07F',
+            <Modal
+              open={open}
+              onClose={handleModalLogoutClose}
+              closeAfterTransition
+              BackdropComponent={Backdrop}
+              BackdropProps={{ timeout: 500 }}
+            >
+              <Fade in={open}>
+                <Box sx={modalStyle}>
+                  <PriorityHighIcon
+                    sx={{
+                      color: '#B44647',
+                      padding: '4px',
+                      width: '32px',
+                      height: '32px',
+                      boxShadow: 'rgba(240, 93, 94, 0.1) 0px 0px 0px 8px',
+                      backgroundColor: 'rgba(240, 93, 94, 0.4)',
+                      borderRadius: '20px',
+                    }}
+                  />
+                  <Typography variant="h6" sx={{ marginTop: '22px', fontWeight: 'bold' }}>
+                    Confirmar Logout
+                  </Typography>
+                  <Typography sx={{ mt: 2 }}>
+                    Alterações não salvas serão perdidas. <br /> Você tem certeza de que deseja sair?
+                  </Typography>
+                  <div className="btn_mensagem">
+                    <Button
+                      variant="outlined"
+                      color="error"
+                      onClick={handleModalLogoutClose}
+                      sx={{
+                        '&:hover': {
+                          backgroundColor: '#F05D5E',
                           color: 'white',
-                          '&:hover': {
-                            backgroundColor: '#215438'
-                          },
-                        }}
-                      >
-                        Confirmar
-                      </Button>
-                    </div>
-                  </Box>
-                </Fade>
-              </Modal>
-            }
+                        },
+                      }}
+                    >
+                      Cancelar
+                    </Button>
+                    <Button
+                      variant="contained"
+                      onClick={handleLogout}
+                      sx={{
+                        backgroundColor: '#4AC07F',
+                        color: 'white',
+                        '&:hover': { backgroundColor: '#215438' },
+                      }}
+                    >
+                      Confirmar
+                    </Button>
+                  </div>
+                </Box>
+              </Fade>
+            </Modal>
             <div className="content">
               <Routes>
                 <Route path={`/home`} element={<ProtectedRoute element={<Home />} />} />
@@ -155,84 +155,84 @@ const AppRoutes = () => {
           </>
         )}
 
+        {/* Rota de restaurante autenticado */}
         {isAuthRestaurant && (
           <>
-            <NorthBar isRestaurante={false}/>
+            <NorthBar isRestaurante={false} />
             <RestauranteMenu onModalLogout={handleModalLogoutOpen} />
-            {handleModalLogoutOpen &&
-              <Modal
-                aria-labelledby="transition-modal-title"
-                aria-describedby="transition-modal-description"
-                open={open}
-                onClose={handleModalLogoutClose}
-                closeAfterTransition
-                slots={{ backdrop: Backdrop }}
-                slotProps={{
-                  backdrop: {
-                    timeout: 500,
-                  },
-                }}
-              >
-                <Fade in={open}>
-                  <Box sx={style}>
-                    <PriorityHighIcon sx={{ color: '#B44647', padding: '4px', width: '32px', height: '32px', boxShadow: 'rgba(240, 93, 94, 0.1) 0px 0px 0px 8px', backgroundColor: 'rgba(240, 93, 94, 0.4)', borderRadius: '20px' }} />
-                    <Typography id="transition-modal-title" variant="h6" component="h2" sx={{ marginTop: '22px', fontWeight: 'bold' }}>
-                      Confirmar Logout
-                    </Typography>
-                    <Typography id="transition-modal-description" sx={{ mt: 2 }}>
-                      Alterações não salvas serão perdidas. <br /> Você tem certeza de que deseja sair?
-                    </Typography>
-                    <div className="btn_mensagem">
-                      <Button
-                        variant="outlined"
-                        color="error"
-                        onClick={handleModalLogoutClose}
-                        sx={{
-                          '&:hover': {
-                            backgroundColor: '#F05D5E',
-                            color: 'white',
-                          },
-                        }}
-                      >
-                        Cancelar
-                      </Button>
-                      <Button
-                        variant="contained"
-                        onClick={handleLogoutRestaurante}
-                        sx={{
-                          alignContent: 'center',
-                          backgroundColor: '#4AC07F',
+            <Modal
+              open={open}
+              onClose={handleModalLogoutClose}
+              closeAfterTransition
+              BackdropComponent={Backdrop}
+              BackdropProps={{ timeout: 500 }}
+            >
+              <Fade in={open}>
+                <Box sx={modalStyle}>
+                  <PriorityHighIcon
+                    sx={{
+                      color: '#B44647',
+                      padding: '4px',
+                      width: '32px',
+                      height: '32px',
+                      boxShadow: 'rgba(240, 93, 94, 0.1) 0px 0px 0px 8px',
+                      backgroundColor: 'rgba(240, 93, 94, 0.4)',
+                      borderRadius: '20px',
+                    }}
+                  />
+                  <Typography variant="h6" sx={{ marginTop: '22px', fontWeight: 'bold' }}>
+                    Confirmar Logout
+                  </Typography>
+                  <Typography sx={{ mt: 2 }}>
+                    Alterações não salvas serão perdidas. <br /> Você tem certeza de que deseja sair?
+                  </Typography>
+                  <div className="btn_mensagem">
+                    <Button
+                      variant="outlined"
+                      color="error"
+                      onClick={handleModalLogoutClose}
+                      sx={{
+                        '&:hover': {
+                          backgroundColor: '#F05D5E',
                           color: 'white',
-                          '&:hover': {
-                            backgroundColor: '#215438'
-                          },
-                        }}
-                      >
-                        Confirmar
-                      </Button>
-                    </div>
-                  </Box>
-                </Fade>
-              </Modal>
-            }
+                        },
+                      }}
+                    >
+                      Cancelar
+                    </Button>
+                    <Button
+                      variant="contained"
+                      onClick={handleLogoutRestaurant}
+                      sx={{
+                        backgroundColor: '#4AC07F',
+                        color: 'white',
+                        '&:hover': { backgroundColor: '#215438' },
+                      }}
+                    >
+                      Confirmar
+                    </Button>
+                  </div>
+                </Box>
+              </Fade>
+            </Modal>
             <div className="content">
               <Routes>
-                <Route path={`/controle`} element={<ProtectedRouteRestaurate element={<Controle />} />} />
-                <Route path={`/pedido`} element={<ProtectedRouteRestaurate element={<Pedido />} />} />
+                <Route path={`/controle`} element={<ProtectedRouteRestaurant element={<Controle />} />} />
+                <Route path={`/pedido`} element={<ProtectedRouteRestaurant element={<Pedido />} />} />
               </Routes>
             </div>
           </>
         )}
 
-        {( !isAuth && !isAuthRestaurant) && (
-              <Routes>
-
-              <Route path="/loginrestaurante" element={<LoginRestaurante onLogin={handleLoginRetaurante}  />} />
-              <Route path="/homepage" element={<HomePage />} />
-              <Route path="/login" element={<Login onLogin={handleLogin} />} />
-              <Route path="/*" element={<Navigate to="/homepage" />} />
-            </Routes>
-        ) }
+        {/* Rotas não autenticadas */}
+        {(!isAuth && !isAuthRestaurant) && (
+          <Routes>
+            <Route path="/loginrestaurante" element={<LoginRestaurante onLogin={handleLoginRestaurant} />} />
+            <Route path="/homepage" element={<HomePage />} />
+            <Route path="/login" element={<Login onLogin={handleLogin} />} />
+            <Route path="/*" element={<Navigate to="/homepage" />} />
+          </Routes>
+        )}
       </div>
     </Router>
   );
