@@ -12,21 +12,21 @@ const selecionar = () => {
           <p>selecione o tipo da sua conta abaixo</p>
 
           <Link to="/login" style={{ textDecoration: 'none' }}>
-          <Button
-            variant="contained"
-            sx={{
-              width: '200px',
-              justifyContent: 'space-between',
-              alignContent: 'center',
-              backgroundColor: '#C7462D',
-              color: 'white',
-              textTransform: 'none',
-              margin: '10px 0px 10px 0px',
-            }}
-            endIcon={<SendRoundedIcon />}
-          >
-            Cliente
-          </Button> 
+            <Button
+              variant="contained"
+              sx={{
+                width: '200px',
+                justifyContent: 'space-between',
+                alignContent: 'center',
+                backgroundColor: '#C7462D',
+                color: 'white',
+                textTransform: 'none',
+                margin: '10px 0px 10px 0px',
+              }}
+              endIcon={<SendRoundedIcon />}
+            >
+              Cliente
+            </Button>
           </Link>
 
           <Link to="/loginrestaurante" style={{ textDecoration: 'none' }}>
@@ -36,10 +36,8 @@ const selecionar = () => {
                 width: '200px',
                 justifyContent: 'space-between',
                 alignContent: 'center',
-                backgroundColor: '#00000000',
-                borderColor: "#C7462D",
-                color: '#C7462D',
-                border: "1px solid",
+                backgroundColor: '#C7462D',
+                color: 'white',
                 textTransform: 'none',
                 margin: '10px 0px 10px 0px',
               }}
@@ -48,7 +46,7 @@ const selecionar = () => {
               Restaurante
             </Button>
           </Link>
-          
+
         </div>
       </div>
     </div>

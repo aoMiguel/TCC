@@ -262,7 +262,7 @@ const LoginRestaurante = ({ onLogin }) => {
                     /></div>
                   <div className="endereco">
                     <MaskedInput
-                      mask={[/\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]}
+                      mask={[/\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/]}
                       value={cep}
                       onChange={(e) => setcep(e.target.value)}
                       render={(ref, props) => (
@@ -310,7 +310,7 @@ const LoginRestaurante = ({ onLogin }) => {
                       helperText={error}
                     />
                     <MaskedInput
-                      mask={[/\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/]}
+                      mask={[/\d/, /\d/, /\d/, /\d/]}
                       value={num}
                       onChange={(e) => setnum(e.target.value)}
                       render={(ref, props) => (
