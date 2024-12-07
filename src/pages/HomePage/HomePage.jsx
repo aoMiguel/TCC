@@ -43,6 +43,7 @@ const selecionar = () => {
                 textTransform: 'none',
                 margin: '10px 0px 10px 0px',
               }}
+              startIcon={<></>}
               endIcon={<SendRoundedIcon />}
             >
               Restaurante
