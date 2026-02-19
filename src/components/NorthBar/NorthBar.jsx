@@ -24,5 +24,5 @@ export default function NorthBar({ isRestaurante }) {
         </div>
       </nav>
     </>
-  );
+);
 }

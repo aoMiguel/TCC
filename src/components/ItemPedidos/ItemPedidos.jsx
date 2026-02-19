@@ -84,7 +84,11 @@ const ItemPedidos = () => {
               <tbody>
                 {pedidos.map((pedido) => (
                   <tr key={pedido.pedidoid}>
-                    <td>{pedido.desc_pedido || 'Sem descrição'}</td>
+                    <td>
+                      {pedido.name}
+                      <br />
+                      <small>{pedido.desc_pedido}</small>
+                    </td>
                     <td>{pedido.valor_total}</td>
                     <td>{pedido.status === 'C' ? 'Concluído' : pedido.status}</td>
                     <td>{new Date(pedido.datapedid).toLocaleString()}</td>
@@ -94,7 +98,7 @@ const ItemPedidos = () => {
                           Concluir
                         </button>
                       ) : (
-                        <span className="verificado">✔</span> // Aqui você pode usar o ícone "✔" ou outro
+                        <span className="verificado">✔</span>
                       )}
                     </td>
                   </tr>
